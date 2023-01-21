@@ -1,1 +1,1 @@
-# tiralabra-tiedontiivistys-algoritmit
+# Tiralabra tiedontiivistys-algoritmit
