@@ -12,7 +12,7 @@ Opinto-ohjelma: tietojenkäsittelytieteen kandidaatti (TKT)
 Dokumentaatiossa käytetty kieli: suomi
 
 Lähteet:
-https://www.programiz.com/dsa/huffman-coding
-https://en.wikipedia.org/wiki/Huffman_coding
-https://en.wikipedia.org/wiki/LZ77_and_LZ78
+https://www.programiz.com/dsa/huffman-coding 
+https://en.wikipedia.org/wiki/Huffman_coding 
+https://en.wikipedia.org/wiki/LZ77_and_LZ78 
 https://ieeexplore.ieee.org/document/1096485
