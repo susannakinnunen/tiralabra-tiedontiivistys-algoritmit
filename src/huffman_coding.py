@@ -18,7 +18,9 @@ class HuffmanCoding:
         return self.frequence_table
 
     def create_minimum_heap(self):
+        """Creates a minimum_heap"""
         pass
 
     def create_huffman_tree(self):
+        """Creates a Huffman tree"""
         pass
