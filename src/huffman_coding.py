@@ -1,8 +1,10 @@
 class HuffmanCoding:
+    """File compressing algorithm"""
     def __init__(self):
         self.frequence_table = {}
     
     def get_string_from_file(self, path):
+        """Gets a path to a file as a parameter and returns a string of the file content"""
         with open(path, "r") as file:
             string = file.read()
             string = string.strip()
