@@ -19,10 +19,15 @@ class HuffmanCoding:
             self.frequence_table[character] += 1
         return self.frequence_table
 
-    def create_minimum_heap(self):
-        """Creates a minimum_heap"""
+    def create_minimum_heap(self, string):
+        """Creates a minimum heap of the charcters in the string according to their frequence."""
         pass
 
     def create_huffman_tree(self):
-        """Creates a Huffman tree"""
+        """Creates a Huffman tree by always taking two minimum nodes from the minimum heap and merges them."""
+        pass
+
+    def encode(self):
+        """Assigns codes, 0's and 1's, to the nodes in the Huffman tree. 
+        The codes are then used to write a compressed file."""
         pass

@@ -10,5 +10,25 @@ class LZ77:
         self.search_window = 1024
         self.lookahead_window = 16
 
-        
 
+    def get_string_from_file(self, path):
+        """Gets a path to a file as a parameter and returns a string of the file content"""
+        with open(path, "r") as file:
+            string = file.read()
+            string = string.strip()
+
+        return string
+
+    def search_longest_match(self):
+        """Finds the longest match in the search_window for
+        the next character(s) in the lookahead_window. Returns a triplet (distance, length, character). 
+        d = The distance to the start of the match, 
+        l = the lenght of the match,
+        c = the next character in the lookahead table that was not matched in the search windows."""
+        pass
+
+    def compress(self):
+        """Creates a compressed file. Matching charcter(s) is written 
+        in the compressed file in the form of information about 
+        the distance to the start of the match and the lenght of the match"""
+        pass
