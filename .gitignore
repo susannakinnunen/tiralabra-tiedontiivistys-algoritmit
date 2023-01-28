@@ -1,4 +1,6 @@
 test.txt
 test_lz77.txt
-src/tests/__pycache__/test_huffman_coding.cpython-38-pytest-7.2.1.pyc
-__pycahce__
+src/__pycache__/
+src/tests/__pycache__/test_lz77.cpython-38-pytest-7.2.1.pyc
+
+
