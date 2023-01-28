@@ -7,5 +7,4 @@
 
 
 ![GitHub Actions](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/workflows/CI/badge.svg)
-
 [![codecov](https://codecov.io/gh/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/branch/main/graph/badge.svg?token=KEMF99W3XG)](https://codecov.io/gh/susannakinnunen/tiralabra-tiedontiivistys-algoritmit)
