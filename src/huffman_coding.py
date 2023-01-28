@@ -11,7 +11,6 @@ class HuffmanCoding:
         with open(path, "r", encoding="utf-8") as file:
             string = file.read()
             string = string.strip()
-
         return string
 
     def create_frequence_table(self, string):
