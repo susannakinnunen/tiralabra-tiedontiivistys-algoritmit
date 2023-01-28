@@ -4,7 +4,7 @@ from huffman_coding import HuffmanCoding
 
 class TestHuffmanCoding(unittest.TestCase):
     def setUp(self):
-        self.huffman_coding = HuffmanCoding() 
+        self.huffman_coding = HuffmanCoding()
 
     def test_frequency_table(self):
         """Test create_frequency_table method"""
