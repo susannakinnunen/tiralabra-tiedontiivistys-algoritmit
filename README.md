@@ -1,4 +1,4 @@
-# Tiralabra tiedontiivistys-algoritmit
+# Tiralabra tiedontiivistys -algoritmit
 
 - [Määrittelydokumentti](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/m%C3%A4%C3%A4rittelydokumentti.md)
 
