@@ -2,8 +2,9 @@
 
 class HuffmanCoding:
     """File compressing and decompressing algorithm"""
-    def __init__(self):
+    def __init__(self, path):
         self.frequence_table = {}
+        self.string = self.get_string_from_file(path)
 
     def get_string_from_file(self, path):
         """Gets a path to a file as a parameter and returns
@@ -13,15 +14,17 @@ class HuffmanCoding:
             string = string.strip()
         return string
 
-    def create_frequence_table(self, string):
+    def create_frequence_table(self, string = None):
         """Creates a frequence table for the characters in a string/text"""
+        if string == None:
+            string = self.string
         for character in string:
             if not character in self.frequence_table:
                 self.frequence_table[character] = 0
             self.frequence_table[character] += 1
         return self.frequence_table
 
-    def create_minimum_heap(self, string):
+    def create_minimum_heap(self):
         """Creates a minimum heap of the charcters
         in the string according to their frequence."""
 
