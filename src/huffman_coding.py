@@ -1,10 +1,12 @@
 """ File compressing and decompressing algorithm"""
+import heapq # provides priority queue algorithms
 
 class HuffmanCoding:
     """File compressing and decompressing algorithm"""
     def __init__(self, path):
         self.frequence_table = {}
         self.string = self.get_string_from_file(path)
+        self.heap = []
 
     def get_string_from_file(self, path):
         """Gets a path to a file as a parameter and returns
@@ -27,6 +29,9 @@ class HuffmanCoding:
     def create_minimum_heap(self):
         """Creates a minimum heap of the charcters
         in the string according to their frequence."""
+        for character in self.frequence_table:
+            node = Node(character, self.frequence_table[character])
+            heapq.heappush(self.heap, node)
 
     def create_huffman_tree(self):
         """Creates a Huffman tree by always taking
@@ -42,3 +47,4 @@ class Node:
     def __init__(self, character, frequency):
         self.character = character
         self. frequency = frequency
+
