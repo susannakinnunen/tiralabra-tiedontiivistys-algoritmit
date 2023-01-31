@@ -35,3 +35,10 @@ class HuffmanCoding:
     def encode(self):
         """Assigns codes, 0's and 1's, to the nodes in the Huffman tree.
         The codes are then used to write a compressed file."""
+
+class Node:
+    """Nodes for the minimum heap
+    """
+    def __init__(self, character, frequency):
+        self.character = character
+        self. frequency = frequency
