@@ -1,6 +1,6 @@
 """ File compressing and decompressing algorithm"""
 import heapq # provides priority queue algorithms
-import os
+#import os needed when debugging
 
 class HuffmanCoding:
     """File compressing and decompressing algorithm"""
@@ -37,17 +37,27 @@ class HuffmanCoding:
     def create_huffman_tree(self):
         """Creates a Huffman tree by calling
         self.create_merged_node function for
-        as long as there are nodes in the self.heap.
-        The merged node becomes the parent of the merged nodes."""
+        as long as there are nodes in the self.heap."""
+        while len(self.heap) > 1:
+            merged_node = self.create_merged_node()
+            heapq.heappush(self.heap, merged_node)
+
+        return self.heap
 
     def create_merged_node(self):
-        """Takes two nodes with the minimum frequency values from
-        the minimum heap and merges them."""
+        """Takes two nodes with minimum frequency values from
+        the minimum heap and merges them creating a merged node.
+        The merged node becomes the parent of the merged nodes"""
         smallest_node = heapq.heappop(self.heap)
         second_smallest_node = heapq.heappop(self.heap)
-        print(smallest_node.frequency + second_smallest_node.frequency)
-        merged_node = Node(None, smallest_node.frequency + second_smallest_node.frequency)
-        print(merged_node.frequency)
+
+        merged_node = Node(
+            None,
+            smallest_node.frequency + second_smallest_node.frequency
+            )
+        merged_node.left = smallest_node
+        merged_node.right = second_smallest_node
+
         return merged_node
 
 
@@ -61,6 +71,8 @@ class Node:
     def __init__(self, character, frequency):
         self.character = character
         self. frequency = frequency
+        self.left = None
+        self.right = None
 
     def __lt__(self, other):
         return self.frequency < other.frequency
@@ -68,12 +80,15 @@ class Node:
     def __repr__(self):
         return f"{self.character}:{self.frequency}"
 
-if __name__ == "__main__":
-    string = "AAABBC"
-    with open(os.path.join(os.getcwd(), "temporary.txt"), "w") as test_file:
-        test_file.write("AAABBC")
-    path = os.path.join(os.getcwd(), "temporary.txt")
-    huffman = HuffmanCoding(path)
-    huffman.create_frequence_table(string)
-    huffman.create_minimum_heap()
-    print(huffman.create_merged_node())
+#"""
+#For debugging:
+#if __name__ == "__main__":
+    #string = "AAABBC"
+    #with open(os.path.join(os.getcwd(), "temporary.txt"), "w") as test_file:
+        #test_file.write("AAABBC")
+    #path = os.path.join(os.getcwd(), "temporary.txt")
+    #huffman = HuffmanCoding(path)
+    #huffman.create_frequence_table(string)
+    #huffman.create_minimum_heap()
+   #print(huffman.create_huffman_tree())
+#"""
