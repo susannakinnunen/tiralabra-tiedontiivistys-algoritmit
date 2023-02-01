@@ -40,3 +40,13 @@ class TestHuffmanCoding(unittest.TestCase):
         merged_node = self.huffman_coding.create_merged_node()
 
         self.assertEqual(str(merged_node), "None:3")
+
+    def test_create_huffman_tree(self):
+        """This test ensures that there is only one node left in the
+        huffman tree with the sum of all the nodes"""
+        string = "AAABBC"
+        self.huffman_coding.create_frequence_table(string)
+        self.huffman_coding.create_minimum_heap()
+        huffman_tree = self.huffman_coding.create_huffman_tree()
+
+        self.assertEqual(str(huffman_tree), "[None:6]")
