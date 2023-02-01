@@ -1,5 +1,6 @@
 """ File compressing and decompressing algorithm"""
 import heapq # provides priority queue algorithms
+import os
 
 class HuffmanCoding:
     """File compressing and decompressing algorithm"""
@@ -34,8 +35,21 @@ class HuffmanCoding:
             heapq.heappush(self.heap, node)
 
     def create_huffman_tree(self):
-        """Creates a Huffman tree by always taking
-        two minimum nodes from the minimum heap and merges them."""
+        """Creates a Huffman tree by calling
+        self.create_merged_node function for
+        as long as there are nodes in the self.heap.
+        The merged node becomes the parent of the merged nodes."""
+
+    def create_merged_node(self):
+        """Takes two nodes with the minimum frequency values from
+        the minimum heap and merges them."""
+        smallest_node = heapq.heappop(self.heap)
+        second_smallest_node = heapq.heappop(self.heap)
+        print(smallest_node.frequency + second_smallest_node.frequency)
+        merged_node = Node(None, smallest_node.frequency + second_smallest_node.frequency)
+        print(merged_node.frequency)
+        return merged_node
+
 
     def encode(self):
         """Assigns codes, 0's and 1's, to the nodes in the Huffman tree.
@@ -53,3 +67,13 @@ class Node:
 
     def __repr__(self):
         return f"{self.character}:{self.frequency}"
+
+if __name__ == "__main__":
+    string = "AAABBC"
+    with open(os.path.join(os.getcwd(), "temporary.txt"), "w") as test_file:
+        test_file.write("AAABBC")
+    path = os.path.join(os.getcwd(), "temporary.txt")
+    huffman = HuffmanCoding(path)
+    huffman.create_frequence_table(string)
+    huffman.create_minimum_heap()
+    print(huffman.create_merged_node())
