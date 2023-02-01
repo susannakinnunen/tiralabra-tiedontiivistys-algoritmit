@@ -32,7 +32,7 @@ class HuffmanCoding:
         for character in self.frequence_table:
             node = Node(character, self.frequence_table[character])
             heapq.heappush(self.heap, node)
-
+ 
     def create_huffman_tree(self):
         """Creates a Huffman tree by always taking
         two minimum nodes from the minimum heap and merges them."""
@@ -48,3 +48,8 @@ class Node:
         self.character = character
         self. frequency = frequency
 
+    def __lt__(self, other):
+        return self.frequency < other.frequency
+
+    def __repr__(self):
+        return f"{self.character}:{self.frequency}"
