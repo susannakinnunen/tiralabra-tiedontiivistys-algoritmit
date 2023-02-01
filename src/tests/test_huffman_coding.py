@@ -50,3 +50,15 @@ class TestHuffmanCoding(unittest.TestCase):
         huffman_tree = self.huffman_coding.create_huffman_tree()
 
         self.assertEqual(str(huffman_tree), "[None:6]")
+
+    def test_create_codes(self):
+        """This test ensures that the characters 
+        get correct codes according to their frequency."""
+        string = "AAABBC"
+        self.huffman_coding.create_frequence_table(string)
+        self.huffman_coding.create_minimum_heap()
+        self.huffman_coding.create_huffman_tree()
+
+        codes = self.huffman_coding.create_codes()
+
+        self.assertEqual(str(codes), "{'A': '0', 'C': '10', 'B': '11'}")
