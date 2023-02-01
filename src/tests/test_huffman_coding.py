@@ -28,6 +28,15 @@ class TestHuffmanCoding(unittest.TestCase):
         string = "AAABBC"
         self.huffman_coding.create_frequence_table(string)
         self.huffman_coding.create_minimum_heap()
+        
         self.assertEqual(str(heapq.heappop(self.huffman_coding.heap)), "C:1")
         self.assertEqual(str(heapq.heappop(self.huffman_coding.heap)), "B:2")
         self.assertEqual(str(heapq.heappop(self.huffman_coding.heap)), "A:3")
+
+    def test_create_a_merged_node(self):
+        string = "AAABBC"
+        self.huffman_coding.create_frequence_table(string)
+        self.huffman_coding.create_minimum_heap()
+        merged_node = self.huffman_coding.create_merged_node()
+
+        self.assertEqual(str(merged_node), "None:3")
