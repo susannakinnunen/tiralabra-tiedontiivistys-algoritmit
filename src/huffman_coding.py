@@ -18,7 +18,7 @@ class HuffmanCoding:
 
     def create_frequence_table(self, string = None):
         """Creates a frequence table for the characters in a string/text"""
-        if string == None:
+        if string is None:
             string = self.string
         for character in string:
             if not character in self.frequence_table:
@@ -29,10 +29,10 @@ class HuffmanCoding:
     def create_minimum_heap(self):
         """Creates a minimum heap of the charcters
         in the string according to their frequence."""
-        for character in self.frequence_table:
-            node = Node(character, self.frequence_table[character])
+        for character, frequency in self.frequence_table.items():
+            node = Node(character, frequency)
             heapq.heappush(self.heap, node)
- 
+
     def create_huffman_tree(self):
         """Creates a Huffman tree by always taking
         two minimum nodes from the minimum heap and merges them."""
