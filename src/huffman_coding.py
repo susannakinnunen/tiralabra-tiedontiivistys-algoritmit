@@ -1,6 +1,6 @@
 """ File compressing and decompressing algorithm"""
 import heapq # provides priority queue algorithms
-#import os needed when debugging
+#import os #needed when debugging
 
 class HuffmanCoding:
     """File compressing and decompressing algorithm"""
@@ -8,6 +8,7 @@ class HuffmanCoding:
         self.frequence_table = {}
         self.string = self.get_string_from_file(path)
         self.heap = []
+        self.character_codes = {}
 
     def get_string_from_file(self, path):
         """Gets a path to a file as a parameter and returns
@@ -61,9 +62,30 @@ class HuffmanCoding:
         return merged_node
 
 
-    def encode(self):
-        """Assigns codes, 0's and 1's, to the nodes in the Huffman tree.
-        The codes are then used to write a compressed file."""
+    def create_codes(self):
+        """Initiates variables for the encoding of
+        the huffman tree. Calls self.encode() function.
+        The codes are then used to write a compressed file.
+        Returns the self.character_codes-dictionary"""
+        root_node = heapq.heappop(self.heap)
+        code = ""
+
+        self.encode(root_node, code)
+
+        return self.character_codes
+
+    def encode(self, node, code):
+        """Assigns codes, 0's and 1's, to the nodes in the Huffman tree."""
+        if node is None:
+            return
+        if node.character is not None:
+            self.character_codes[node.character] = code
+        print(node)
+        print(self.character_codes)
+        self.encode(node.left, code + "0")
+        print("hep")
+        self.encode(node.right, code + "1")
+
 
 class Node:
     """Nodes for the minimum heap
@@ -74,13 +96,13 @@ class Node:
         self.left = None
         self.right = None
 
-    def __lt__(self, other):
-        return self.frequency < other.frequency
+    def __lt__(self, comparing_node):
+        return self.frequency < comparing_node.frequency
 
     def __repr__(self):
         return f"{self.character}:{self.frequency}"
 
-#"""
+
 #For debugging:
 #if __name__ == "__main__":
     #string = "AAABBC"
@@ -90,5 +112,5 @@ class Node:
     #huffman = HuffmanCoding(path)
     #huffman.create_frequence_table(string)
     #huffman.create_minimum_heap()
-   #print(huffman.create_huffman_tree())
-#"""
+    #print(huffman.create_huffman_tree())
+    #print(huffman.create_codes())
