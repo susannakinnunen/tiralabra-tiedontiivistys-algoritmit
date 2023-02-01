@@ -26,9 +26,8 @@ class TestHuffmanCoding(unittest.TestCase):
     def test_create_minimum_heap(self):
         "Test if create_mimum_heap works as expected"
         string = "AAABBC"
-        frequence_table = self.huffman_coding.create_frequence_table(string)
+        self.huffman_coding.create_frequence_table(string)
         self.huffman_coding.create_minimum_heap()
-        print(self.huffman_coding.heap)
         self.assertEqual(str(heapq.heappop(self.huffman_coding.heap)), "C:1")
         self.assertEqual(str(heapq.heappop(self.huffman_coding.heap)), "B:2")
         self.assertEqual(str(heapq.heappop(self.huffman_coding.heap)), "A:3")
