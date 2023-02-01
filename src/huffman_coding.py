@@ -80,11 +80,17 @@ class HuffmanCoding:
             return
         if node.character is not None:
             self.character_codes[node.character] = code
-        print(node)
-        print(self.character_codes)
+
         self.encode(node.left, code + "0")
-        print("hep")
         self.encode(node.right, code + "1")
+
+    def create_encoded_string(self, string):
+        """Creates an encoded string from the original string
+        """
+        encoded_string = ""
+        for character in string:
+            encoded_string += self.character_codes[character]
+        return encoded_string
 
 
 class Node:
@@ -112,5 +118,6 @@ class Node:
     #huffman = HuffmanCoding(path)
     #huffman.create_frequence_table(string)
     #huffman.create_minimum_heap()
-    #print(huffman.create_huffman_tree())
-    #print(huffman.create_codes())
+    #huffman.create_huffman_tree()
+    #huffman.create_codes()
+    #print(huffman.create_encoded_string("AAABBC"))
