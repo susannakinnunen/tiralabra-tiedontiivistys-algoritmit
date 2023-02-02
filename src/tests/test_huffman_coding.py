@@ -70,3 +70,43 @@ class TestHuffmanCoding(unittest.TestCase):
         codes = self.huffman_coding.create_codes()
 
         self.assertEqual(str(codes), "{'A': '0', 'C': '10', 'B': '11'}")
+
+    def test_create_encoded_string(self):
+        """Tests if the create_encoded_string_function works as expected."""
+        string = "AAABBC"
+        self.huffman_coding.create_frequence_table(string)
+        self.huffman_coding.create_minimum_heap()
+        self.huffman_coding.create_huffman_tree()
+        self.huffman_coding.create_codes()
+        encoded_string = self.huffman_coding.create_encoded_string(string)
+
+        self.assertEqual(str(encoded_string), "000111110")
+
+    def test_binary_file_length_and_correctness(self):
+        """At the moment tests if the function returns a file of whose lenght is divisible by 8. Also tests if the returned binary string is correct."""
+        string = "AAABBC"
+        self.huffman_coding.create_frequence_table(string)
+        self.huffman_coding.create_minimum_heap()
+        self.huffman_coding.create_huffman_tree()
+        self.huffman_coding.create_codes()
+        encoded_string = self.huffman_coding.create_encoded_string(string)
+        binary_string = self.huffman_coding.create_compressed_file(encoded_string)
+        divisible_by_eight = len(binary_string) % 8
+        
+        self.assertEqual(str(divisible_by_eight), "0")
+
+        self.assertEqual(str(binary_string),"000001110001111100000000")
+
+    def test_binary_file_length_if_string_divisible_by_8(self):
+        string = "ABCD"
+        self.huffman_coding.create_frequence_table(string)
+        self.huffman_coding.create_minimum_heap()
+        self.huffman_coding.create_huffman_tree()
+        self.huffman_coding.create_codes()
+        encoded_string = self.huffman_coding.create_encoded_string(string)
+        binary_string = self.huffman_coding.create_compressed_file(encoded_string)
+        divisible_by_eight = len(binary_string) % 8
+        
+        self.assertEqual(str(divisible_by_eight), "0")
+
+        self.assertEqual(str(binary_string),"0000000000100111")       
