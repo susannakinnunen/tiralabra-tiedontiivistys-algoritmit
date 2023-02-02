@@ -128,9 +128,15 @@ class HuffmanCoding:
             encoded_string
             )
         # fetches the encoded string which is divisble by 8
+        
         byte_list = self.create_byte_list(encoded_string_with_filling)
         # fetches a list of bytes
-        return byte_list
+        
+        with open("compressed.bin", "wb") as binary_file:
+            binary_file.write(byte_list)
+        
+        return binary_file
+
 
 class Node:
     """Nodes for the minimum heap
@@ -159,7 +165,6 @@ class Node:
     #huffman.create_frequence_table(string)
     #huffman.create_minimum_heap()
     #huffman.create_huffman_tree()
-    #print(huffman.create_codes())
+    #huffman.create_codes()
     #encoded_string = huffman.create_encoded_string(string)
-    #print("encoded",encoded_string)
-    #print("bytes",huffman.create_compressed_file(encoded_string))
+    #huffman.create_compressed_file(encoded_string)
