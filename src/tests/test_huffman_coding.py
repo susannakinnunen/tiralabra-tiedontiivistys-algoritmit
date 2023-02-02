@@ -16,6 +16,14 @@ class TestHuffmanCoding(unittest.TestCase):
         string = "AABC"
         frequence_table = self.huffman_coding.create_frequence_table(string)
         self.assertEqual(frequence_table, {"A":2, "B":1, "C":1})
+    
+    def test_frequency_table_where_string_None(self):
+        string = None
+        frequence_table = self.huffman_coding.create_frequence_table(string)
+        self.assertEqual(
+            frequence_table,
+            {'T': 1, 'e': 2, 's': 1, 't': 3, ' ': 2, 'x': 1, ':': 1, '\n': 1, '1': 1, '2': 1, '3': 1, '6': 1, '8': 1}
+            )
 
     def test_get_string_from_file(self):
         """Test get_string_from_file method""" 
