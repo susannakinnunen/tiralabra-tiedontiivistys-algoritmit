@@ -102,23 +102,35 @@ class HuffmanCoding:
             filling_length = 8 - modulus # the modulus is subtracted from 8
             # in order to know how many bits to add to the encoded_string
             for index in range(filling_length): #pylint:disable=unused-variable
-                # the remainder in filling_length is added to the end of the encoded_string
+                # the remainder in filling_length is
+                # added to the end of the encoded_string
                 encoded_string += "0"
 
-        filling_information_binary = "{0:08b}".format(filling_length)
+        filling_information_binary = "{0:08b}".format(filling_length) #pylint:disable=consider-using-f-string
         #filling is formatted into 8-bits long binary form
         encoded_string = filling_information_binary + encoded_string
         # filling_information is used to tell the decompressing algorithm
         # the lenght of the extra bits in the end.
         return encoded_string
 
+    def create_byte_list(self, encoded_string_with_filling):
+        """Creates a list of bytes from the encoded_string_with_filling
+        """
+        byte_list = bytearray()
+        for i in range(0, len(encoded_string_with_filling), 8):
+            byte = encoded_string_with_filling[i:i+8]
+            byte_list.append(int(byte, 2))
+        return byte_list
+
     def create_compressed_file(self, encoded_string):
         """Creates a compressed file"""
         encoded_string_with_filling = self.write_remaining_bits(
             encoded_string
             )
-        return encoded_string_with_filling
-
+        # fetches the encoded string which is divisble by 8
+        byte_list = self.create_byte_list(encoded_string_with_filling)
+        # fetches a list of bytes
+        return byte_list
 
 class Node:
     """Nodes for the minimum heap
@@ -138,10 +150,10 @@ class Node:
 
 #For debugging:
 #if __name__ == "__main__":
-    #string = "ABCD"
+    #string = "AAABCD"
     #with open(os.path.join(os.getcwd(), "temporary.txt"), "w") as test_file:
-        #test_file.write("ABCD")
-    #path = os.path.join(os.getcwd(), "temporary.txt")
+       #test_file.write("AAABCD")
+    #path = os.path.join(os.getcwd(), "loremipsum.txt")
     #huffman = HuffmanCoding(path)
     #string = huffman.get_string_from_file(path)
     #huffman.create_frequence_table(string)
@@ -150,4 +162,4 @@ class Node:
     #print(huffman.create_codes())
     #encoded_string = huffman.create_encoded_string(string)
     #print("encoded",encoded_string)
-    #print("extras",huffman.create_compressed_file(encoded_string))
+    #print("bytes",huffman.create_compressed_file(encoded_string))
