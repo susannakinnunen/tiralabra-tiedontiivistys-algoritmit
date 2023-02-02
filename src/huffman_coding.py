@@ -1,6 +1,6 @@
 """ File compressing and decompressing algorithm"""
 import heapq # provides priority queue algorithms
-#import os #needed when debugging
+import os #needed when debugging
 
 class HuffmanCoding:
     """File compressing and decompressing algorithm"""
@@ -92,6 +92,30 @@ class HuffmanCoding:
             encoded_string += self.character_codes[character]
         return encoded_string
 
+    def write_remaining_bits(self, encoded_string):
+        """Makes the encoded string divisible by 8,
+        so that it can be later converted into bytes"""
+        filling_length = len(encoded_string) % 8
+        #checks if the encoded string is divisible by 8
+        if filling_length != 0:
+        # if not, the remainder is added in the end of the encoded string
+            for index in range(filling_length): #pylint:disable=unused-variable
+                encoded_string += "0"
+
+        filling_information_binary = f"{0:08b}".format(filling_length)
+        #filling is formatted into 8-bits long binary form
+        encoded_string = filling_information_binary + encoded_string
+        # filling_information is used to tell the decompressing algorithm
+        # the lenght of the extra bits in the end.
+        return encoded_string
+
+    def create_compressed_file(self, encoded_string):
+        """Creates a compressed file"""
+        encoded_string_with_filling = self.write_remaining_bits(
+            encoded_string
+            )
+        return encoded_string_with_filling
+
 
 class Node:
     """Nodes for the minimum heap
@@ -110,14 +134,17 @@ class Node:
 
 
 #For debugging:
-#if __name__ == "__main__":
+if __name__ == "__main__":
     #string = "AAABBC"
     #with open(os.path.join(os.getcwd(), "temporary.txt"), "w") as test_file:
         #test_file.write("AAABBC")
-    #path = os.path.join(os.getcwd(), "temporary.txt")
-    #huffman = HuffmanCoding(path)
-    #huffman.create_frequence_table(string)
+    path = os.path.join(os.getcwd(), "test.txt")
+    huffman = HuffmanCoding(path)
+    string = huffman.get_string_from_file(path)
+    print(huffman.create_frequence_table(string))
     #huffman.create_minimum_heap()
     #huffman.create_huffman_tree()
     #huffman.create_codes()
-    #print(huffman.create_encoded_string("AAABBC"))
+    #encoded_string = huffman.create_encoded_string(string)
+    #print("encoded",encoded_string)
+    #print("extras",huffman.create_compressed_file(encoded_string))
