@@ -5,6 +5,7 @@
 ## Viikkoraportit
 - [Viikko 1](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti%201.md)
 - [Viikko 2](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti2.md)
+- [Viikko 3](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti3.md)
 
 
 ![GitHub Actions](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/workflows/CI/badge.svg)
