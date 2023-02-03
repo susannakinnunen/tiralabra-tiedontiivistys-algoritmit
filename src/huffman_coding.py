@@ -48,7 +48,7 @@ class HuffmanCoding:
     def create_merged_node(self):
         """Takes two nodes with minimum frequency values from
         the minimum heap and merges them creating a merged node.
-        The merged node becomes the parent of the merged nodes"""
+        The merged node becomes the parent of the two taken nodes"""
         smallest_node = heapq.heappop(self.heap)
         second_smallest_node = heapq.heappop(self.heap)
 
@@ -64,8 +64,8 @@ class HuffmanCoding:
 
     def create_codes(self):
         """Initiates variables for the encoding of
-        the huffman tree. Calls self.encode() function.
-        The codes are then used to write a compressed file.
+        the huffman tree. Calls self.encode() function,
+        which startto call itself recursively.
         Returns the self.character_codes-dictionary"""
         root_node = heapq.heappop(self.heap)
         code = ""
@@ -75,7 +75,8 @@ class HuffmanCoding:
         return self.character_codes
 
     def encode(self, node, code):
-        """Assigns codes, 0's and 1's, to the nodes in the Huffman tree."""
+        """Assigns codes, 0's and 1's, to the nodes in the Huffman tree.
+        Recursive function."""
         if node is None:
             return
         if node.character is not None:
@@ -92,6 +93,20 @@ class HuffmanCoding:
             encoded_string += self.character_codes[character]
         return encoded_string
 
+    def create_compressed_file(self, encoded_string):
+        """Creates a compressed file"""
+        encoded_string_with_filling = self.write_remaining_bits(
+            encoded_string
+            )
+        # fetches the encoded string which is divisble by 8
+
+        byte_list = self.create_byte_list(encoded_string_with_filling)
+        # fetches a list of bytes
+
+        with open("compressed.bin", "wb") as binary_file:
+            binary_file.write(byte_list)
+
+        return binary_file
     def write_remaining_bits(self, encoded_string):
         """Makes the encoded string divisible by 8,
         so that it can be later converted into bytes"""
@@ -121,21 +136,6 @@ class HuffmanCoding:
             byte = encoded_string_with_filling[i:i+8]
             byte_list.append(int(byte, 2))
         return byte_list
-
-    def create_compressed_file(self, encoded_string):
-        """Creates a compressed file"""
-        encoded_string_with_filling = self.write_remaining_bits(
-            encoded_string
-            )
-        # fetches the encoded string which is divisble by 8
-        
-        byte_list = self.create_byte_list(encoded_string_with_filling)
-        # fetches a list of bytes
-        
-        with open("compressed.bin", "wb") as binary_file:
-            binary_file.write(byte_list)
-        
-        return binary_file
 
 
 class Node:
