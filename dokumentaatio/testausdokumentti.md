@@ -7,7 +7,7 @@ Yksikkötestauksen kattavuusraportti on löydettävissä täältä:
 
 Kuva testauksen kattavuusraportista 4.2.:
 
-![Testikattavuusraportti-kuva 4.2.](tiralabra-tiedontiivistys-algoritmit/dokumentaatio/kuvat/Coveragereport from 2023-02-04 11-21-23.png)
+![Testikattavuusraportti-kuva 4.2.](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/Coveragereport%20from%202023-02-04%2011-21-23.png)
 
 ## Mitä on testattu, miten tämä tehtiin?
 
