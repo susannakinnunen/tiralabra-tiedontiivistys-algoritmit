@@ -1,14 +1,27 @@
 """ File compressing and decompressing algorithm"""
 import heapq # provides priority queue algorithms
-#import os #needed when debugging
 
 class HuffmanCoding:
     """File compressing and decompressing algorithm"""
-    def __init__(self, path):
+    def __init__(self, path, command):
         self.frequence_table = {}
         self.string = self.get_string_from_file(path)
         self.heap = []
         self.character_codes = {}
+        self.path = path
+        if command == "compress":
+            self.compress()
+        else:
+            self.decompress()
+    
+    def compress(self):
+        self.create_frequence_table(self.string)
+        self.create_minimum_heap()
+        self.create_huffman_tree()
+        self.create_codes()
+        encoded_string = self.create_encoded_string()
+        self.create_compressed_file(encoded_string)
+        return 
 
     def get_string_from_file(self, path):
         """Gets a path to a file as a parameter and returns
@@ -85,11 +98,11 @@ class HuffmanCoding:
         self.encode(node.left, code + "0")
         self.encode(node.right, code + "1")
 
-    def create_encoded_string(self, string):
+    def create_encoded_string(self):
         """Creates an encoded string from the original string
         """
         encoded_string = ""
-        for character in string:
+        for character in self.string:
             encoded_string += self.character_codes[character]
         return encoded_string
 
@@ -137,6 +150,9 @@ class HuffmanCoding:
             byte_list.append(int(byte, 2))
         return byte_list
 
+def decompress(self):
+    pass
+
 
 class Node:
     """Nodes for the minimum heap
@@ -152,19 +168,3 @@ class Node:
 
     def __repr__(self):
         return f"{self.character}:{self.frequency}"
-
-
-#For debugging:
-#if __name__ == "__main__":
-    #string = "AAABCD"
-    #with open(os.path.join(os.getcwd(), "temporary.txt"), "w") as test_file:
-       #test_file.write("AAABCD")
-    #path = os.path.join(os.getcwd(), "loremipsum.txt")
-    #huffman = HuffmanCoding(path)
-    #string = huffman.get_string_from_file(path)
-    #huffman.create_frequence_table(string)
-    #huffman.create_minimum_heap()
-    #huffman.create_huffman_tree()
-    #huffman.create_codes()
-    #encoded_string = huffman.create_encoded_string(string)
-    #huffman.create_compressed_file(encoded_string)
