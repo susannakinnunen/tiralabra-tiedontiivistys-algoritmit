@@ -61,7 +61,20 @@ class TestHuffmanCoding(unittest.TestCase):
         binary_string_before_compression = self.huffman_coding.write_remaining_bits(binary_string_before_compression)
         binary_string_after_compression = self.huffman_coding.get_binary_string_from_compressed_file()
         self.assertEqual(binary_string_after_compression, binary_string_before_compression)
+    
+    def test_remove_filling_bits(self):
+        self.huffman_coding.compress()
 
+        self.huffman_coding.create_frequence_table()
+        self.huffman_coding.create_minimum_heap()
+        self.huffman_coding.create_huffman_tree()
+        self.huffman_coding.create_codes()
+        binary_string_before_compression = self.huffman_coding.create_encoded_string()
+        binary_string_after_compression_filling = self.huffman_coding.get_binary_string_from_compressed_file()
+
+        binary_string_after_compression_no_filling = self.huffman_coding.remove_filling_bits(binary_string_after_compression_filling)
+
+        self.assertEqual(binary_string_after_compression_no_filling, binary_string_before_compression)
 """
     def test_create_codes(self):
         """"""This test ensures that the characters 
