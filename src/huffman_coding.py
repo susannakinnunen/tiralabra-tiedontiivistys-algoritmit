@@ -1,27 +1,30 @@
 """ File compressing and decompressing algorithm"""
 import heapq # provides priority queue algorithms
+import os
 
 class HuffmanCoding:
     """File compressing and decompressing algorithm"""
-    def __init__(self, path, command):
+    def __init__(self, path, command = None):
         self.frequence_table = {}
         self.string = self.get_string_from_file(path)
         self.heap = []
-        self.character_codes = {}
+        self.character_codes = { }#Individual characters and their binarycodes
         self.path = path
         if command == "compress":
             self.compress()
-        else:
+        elif command == "decompress":
             self.decompress()
-    
+        else:
+            return
+
     def compress(self):
-        self.create_frequence_table(self.string)
+        """A service function to take care of the compression"""
+        self.create_frequence_table()
         self.create_minimum_heap()
         self.create_huffman_tree()
         self.create_codes()
         encoded_string = self.create_encoded_string()
         self.create_compressed_file(encoded_string)
-        return 
 
     def get_string_from_file(self, path):
         """Gets a path to a file as a parameter and returns
@@ -31,11 +34,9 @@ class HuffmanCoding:
             string = string.strip()
         return string
 
-    def create_frequence_table(self, string = None):
+    def create_frequence_table(self):
         """Creates a frequence table for the characters in a string/text"""
-        if string is None:
-            string = self.string
-        for character in string:
+        for character in self.string:
             if not character in self.frequence_table:
                 self.frequence_table[character] = 0
             self.frequence_table[character] += 1
@@ -47,6 +48,7 @@ class HuffmanCoding:
         for character, frequency in self.frequence_table.items():
             node = Node(character, frequency)
             heapq.heappush(self.heap, node)
+        return self.heap
 
     def create_huffman_tree(self):
         """Creates a Huffman tree by calling
@@ -150,9 +152,24 @@ class HuffmanCoding:
             byte_list.append(int(byte, 2))
         return byte_list
 
-def decompress(self):
-    pass
+    def decompress(self):
+        """Decompresses the compressed file"""
+         # 1 .read and save binary file in the given path
+        self.get_binary_string_from_file()
+        # 2. find out the amount of filling bits and remove them
+        # 3. decode the string ->
+        # replace the codes with the help of self.character codes
+        # 4. save the decoded string
 
+    def get_binary_string_from_file(self):
+        """Fetches a binary string from the compressed file"""
+        # 1 .read binary file in the given path
+        with open(os.path.join(
+            os.getcwd(), "compressed.bin"), "rb", encoding="utf-8"
+            ) as file:
+            binary_string = file.read()
+            binary_string = binary_string.strip()
+        return binary_string
 
 class Node:
     """Nodes for the minimum heap
