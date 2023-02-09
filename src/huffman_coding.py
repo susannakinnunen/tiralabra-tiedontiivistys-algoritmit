@@ -157,6 +157,7 @@ class HuffmanCoding:
          # 1 .read and save binary file in the given path
         binary_string = self.get_binary_string_from_file()
         # 2. find out the amount of filling bits and remove them
+        binary_string = self.remove_filling_bits(binary_string)
         # 3. decode the string ->
         # replace the codes with the help of self.character codes
         # 4. save the decoded string
@@ -177,6 +178,15 @@ class HuffmanCoding:
                 byte_from_file = file.read(1)
         
         return binary_string
+
+    def remove_filling_bits(self, binary_string):
+        filling_information_binary = binary_string[:8]
+        filling_length = int(filling_information_binary, 2)
+
+        binary_string_no_filling_info = binary_string[8:]
+        binary_string_no_filling = binary_string_no_filling_info[:-1*filling_length]
+
+        return binary_string_no_filling
 
 class Node:
     """Nodes for the minimum heap
