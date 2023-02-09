@@ -8,7 +8,9 @@ class HuffmanCoding:
         self.frequence_table = {}
         self.string = self.get_string_from_file(path)
         self.heap = []
-        self.character_codes = { }#Individual characters and their binarycodes
+        self.character_codes = {}#Individual characters and their binarycodes
+        self.reversed_charcter_codes = {} #Binarycodes with their characters
+                                            #for decoding
         self.path = path
         if command == "compress":
             self.compress()
@@ -96,6 +98,7 @@ class HuffmanCoding:
             return
         if node.character is not None:
             self.character_codes[node.character] = code
+            self.reversed_charcter_codes[code] = node.character
 
         self.encode(node.left, code + "0")
         self.encode(node.right, code + "1")
@@ -160,6 +163,7 @@ class HuffmanCoding:
         binary_string = self.remove_filling_bits(binary_string)
         # 3. decode the string ->
         # replace the codes with the help of self.character codes
+        decoded_string = self.decode_string(binary_string)
         # 4. save the decoded string
 
     def get_binary_string_from_compressed_file(self):
@@ -187,6 +191,18 @@ class HuffmanCoding:
         binary_string_no_filling = binary_string_no_filling_info[:-1*filling_length]
 
         return binary_string_no_filling
+
+    def decode_string(self, binary_string):
+        code = ""
+        decoded_string = ""
+
+        for bit in binary_string:
+            code += bit
+            if(code in self.reversed_charcter_codes):
+                decoded_string += self.reversed_charcter_codes[code]
+                code = ""
+        
+        return decoded_string
 
 class Node:
     """Nodes for the minimum heap
