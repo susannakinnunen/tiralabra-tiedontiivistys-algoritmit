@@ -155,20 +155,27 @@ class HuffmanCoding:
     def decompress(self):
         """Decompresses the compressed file"""
          # 1 .read and save binary file in the given path
-        self.get_binary_string_from_file()
+        binary_string = self.get_binary_string_from_file()
         # 2. find out the amount of filling bits and remove them
         # 3. decode the string ->
         # replace the codes with the help of self.character codes
         # 4. save the decoded string
 
-    def get_binary_string_from_file(self):
+    def get_binary_string_from_compressed_file(self):
         """Fetches a binary string from the compressed file"""
         # 1 .read binary file in the given path
+        binary_string = ""
         with open(os.path.join(
-            os.getcwd(), "compressed.bin"), "rb", encoding="utf-8"
+            os.getcwd(), "compressed.bin"), "rb"
             ) as file:
-            binary_string = file.read()
-            binary_string = binary_string.strip()
+            
+            byte_from_file = file.read(1)
+            while(len(byte_from_file) > 0):
+                byte_from_file = ord(byte_from_file)
+                bits = bin(byte_from_file)[2:].rjust(8, "0")
+                binary_string += bits
+                byte_from_file = file.read(1)
+        
         return binary_string
 
 class Node:
