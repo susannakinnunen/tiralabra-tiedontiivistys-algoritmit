@@ -9,4 +9,4 @@ if __name__ == "__main__":
     text_file_path = input("Anna tekstitiedoston polku:")
     compressor = HuffmanCoding(text_file_path, "compress")
     UI(compressor)
-    print("Tiedosto on kompressoitu samaan kansioon kuin missä olet")
+    print("Tiedosto on kompressoitu samaan kansioon kuin missä olet nimellä comprsesed.bin")
