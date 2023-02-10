@@ -12,12 +12,12 @@ class TestHuffmanCoding(unittest.TestCase):
 
         # testing with short strings and small files (insuficcient)
         self.path = os.path.join(os.getcwd(), "test.txt")
-        self.huffman_coding = HuffmanCoding(self.path)
+        self.huffman_coding = HuffmanCoding(self.path, "test")
         
         ## testing with bigger files
         FileForTesting() # Creates test_file.txt
         path = os.path.join(os.getcwd(), "test_file.txt")
-        self.huffman = HuffmanCoding(path)
+        self.huffman = HuffmanCoding(path, "test")
 
     def test_frequency_table(self):
         """Test create_frequency_table method"""
