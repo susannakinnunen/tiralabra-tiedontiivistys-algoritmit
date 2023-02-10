@@ -32,13 +32,16 @@ class HuffmanCoding:
         a string of the file content"""
         with open(path, "r", encoding="utf-8") as file:
             string = file.read()
-            string = string.strip()
         return string
 
     def create_frequence_table(self):
         """Creates a frequence table for the characters in a string/text"""
+        index = 0
         for character in self.string:
+            index += 1
             if not character in self.frequence_table:
+                if character == "\n" and index == 1:
+                    print(character, "jee")
                 self.frequence_table[character] = 0
             self.frequence_table[character] += 1
         return self.frequence_table
@@ -127,16 +130,12 @@ class HuffmanCoding:
     def write_remaining_bits(self, encoded_string):
         """Makes the encoded string divisible by 8,
         so that it can be later converted into bytes"""
-        modulus = len(encoded_string) % 8
-        filling_length = modulus
-        #checks if the encoded string is divisible by 8
-        if modulus != 0:
-            filling_length = 8 - modulus # the modulus is subtracted from 8
-            # in order to know how many bits to add to the encoded_string
-            for index in range(filling_length): #pylint:disable=unused-variable
-                # the remainder in filling_length is
-                # added to the end of the encoded_string
-                encoded_string += "0"
+        filling_length = 8 - len(encoded_string) % 8
+        # checks if the encoded string is divisible by 8
+        for element in range(filling_length): #pylint:disable=unused-variable
+            # 0's equal to the amount of filling_length
+            # is added to the end of the encoded_string.
+            encoded_string += "0"
 
         filling_information_binary = "{0:08b}".format(filling_length) #pylint:disable=consider-using-f-string
         #filling is formatted into 8-bits long binary form
