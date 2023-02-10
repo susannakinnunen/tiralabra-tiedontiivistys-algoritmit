@@ -5,19 +5,18 @@ import os
 class HuffmanCoding:
     """File compressing and decompressing algorithm"""
     def __init__(self, path, command = None):
+        self.reversed_charcter_codes = {} #Binarycodes with their characters
+                                        #for decoding
+        self.character_codes = {} #Individual characters and their binarycodes
         self.frequence_table = {}
         self.string = self.get_string_from_file(path)
         self.heap = []
-        self.character_codes = {}#Individual characters and their binarycodes
-        self.reversed_charcter_codes = {} #Binarycodes with their characters
-                                            #for decoding
         self.path = path
-        if command == "compress":
+        if command is None:
             self.compress()
-        elif command == "decompress":
             self.decompress()
-        else:
-            return
+        # Command can also be equal to "test",
+        # then compression and decompression are not automatically run.
 
     def compress(self):
         """A service function to take care of the compression"""
@@ -158,13 +157,20 @@ class HuffmanCoding:
     def decompress(self):
         """Decompresses the compressed file"""
          # 1 .read and save binary file in the given path
-        binary_string = self.get_binary_string_from_file()
+        binary_string = self.get_binary_string_from_compressed_file()
         # 2. find out the amount of filling bits and remove them
         binary_string = self.remove_filling_bits(binary_string)
         # 3. decode the string ->
         # replace the codes with the help of self.character codes
         decoded_string = self.decode_string(binary_string)
         # 4. save the decoded string
+        with open(
+            "decompressed.txt", "w", encoding="utf-8"
+            )as decompressed_file:
+            decompressed_file.write(decoded_string)
+
+        return decompressed_file
+
 
     def get_binary_string_from_compressed_file(self):
         """Fetches a binary string from the compressed file"""
@@ -173,35 +179,35 @@ class HuffmanCoding:
         with open(os.path.join(
             os.getcwd(), "compressed.bin"), "rb"
             ) as file:
-            
             byte_from_file = file.read(1)
-            while(len(byte_from_file) > 0):
+            while len(byte_from_file) > 0:
                 byte_from_file = ord(byte_from_file)
                 bits = bin(byte_from_file)[2:].rjust(8, "0")
                 binary_string += bits
                 byte_from_file = file.read(1)
-        
+
         return binary_string
 
     def remove_filling_bits(self, binary_string):
+        """Removes filling bits from the bitstring"""
         filling_information_binary = binary_string[:8]
         filling_length = int(filling_information_binary, 2)
 
-        binary_string_no_filling_info = binary_string[8:]
-        binary_string_no_filling = binary_string_no_filling_info[:-1*filling_length]
+        binary_string_filling = binary_string[8:]
+        binary_string_no_filling = binary_string_filling[:-1*filling_length]
 
         return binary_string_no_filling
 
     def decode_string(self, binary_string):
+        """Decodes bitstring into characters"""
         code = ""
         decoded_string = ""
-
         for bit in binary_string:
             code += bit
-            if(code in self.reversed_charcter_codes):
+            if code in self.reversed_charcter_codes:
                 decoded_string += self.reversed_charcter_codes[code]
                 code = ""
-        
+
         return decoded_string
 
 class Node:
