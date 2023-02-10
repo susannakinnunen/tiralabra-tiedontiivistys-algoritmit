@@ -16,72 +16,29 @@ class TestHuffmanCoding(unittest.TestCase):
         
         ## testing with bigger files
         FileForTesting() # Creates test_file.txt
-        path = os.path.join(os.getcwd(), "test_file.txt")
+        path = os.path.join(os.getcwd(), "kalevala.txt")
         self.huffman = HuffmanCoding(path, "test")
-
-    def test_frequency_table(self):
-        """Test create_frequency_table method"""
-        frequence_table = self.huffman.create_frequence_table()
-        self.assertEqual(frequence_table, {"a":30000, "B":15000, "c":857000, "d":765432, "e":456777, "Ä":68, "å":73, '"':3, "(":1, " ":20034, "\n":100, "&":778276, "{":81})
-   
-    def test_create_minimum_heap(self):
-        "Test if create_mimum_heap works as expected"
-        self.huffman.create_frequence_table()
-        minimumheap = self.huffman.create_minimum_heap()
-        print(minimumheap)
-        self.assertEqual(str(heapq.heappop(self.huffman.heap)), "(:1")
-        self.assertEqual(str(heapq.heappop(self.huffman.heap)), '":3')
-        self.assertEqual(str(heapq.heappop(self.huffman.heap)), "Ä:68")
-
-
-    def test_create_a_merged_node(self):
-        self.huffman.create_frequence_table()
-        self.huffman.create_minimum_heap()
-        merged_node = self.huffman.create_merged_node()
-
-        self.assertEqual(str(merged_node), "None:4")
-
-    def test_create_huffman_tree(self):
-        """This test ensures that there is only one node left in the
-        huffman tree with the sum of all the nodes"""
-        self.huffman.create_frequence_table()
-        self.huffman.create_minimum_heap()
-        huffman_tree = self.huffman.create_huffman_tree()
-
-        self.assertEqual(str(huffman_tree), "[None:2922845]")
-
-    def test_get_binary_string_from_file(self):
-        self.huffman_coding.compress()
-
-        self.huffman_coding.create_frequence_table()
-        self.huffman_coding.create_minimum_heap()
-        self.huffman_coding.create_huffman_tree()
-        self.huffman_coding.create_codes()
-        binary_string_before_compression = self.huffman_coding.create_encoded_string()
-        binary_string_before_compression = self.huffman_coding.write_remaining_bits(binary_string_before_compression)
-        binary_string_after_compression = self.huffman_coding.get_binary_string_from_compressed_file()
-        self.assertEqual(binary_string_after_compression, binary_string_before_compression)
     
-    def test_remove_filling_bits(self):
-        self.huffman_coding.create_frequence_table()
-        self.huffman_coding.create_minimum_heap()
-        self.huffman_coding.create_huffman_tree()
-        self.huffman_coding.create_codes()
-        binary_string_before_compression = self.huffman_coding.create_encoded_string()
-        binary_string_after_compression_filling = self.huffman_coding.get_binary_string_from_compressed_file()
+    def test_compress_is_smaller(self):
+        """Tests if the compressed file size is at least 60 % smaller than the original file size"""
+        self.huffman.compress()
+        original_file_size = os.path.getsize(os.path.join(os.getcwd(), "kalevala.txt"))
+        compressed_file_size = os.path.getsize(os.path.join(os.getcwd(), "compressed.bin"))
 
-        binary_string_after_compression_no_filling = self.huffman_coding.remove_filling_bits(binary_string_after_compression_filling)
+        assert compressed_file_size/original_file_size <= 0.60
+    
+    def test_decompress_returns_original_file_content(self):
+        self.huffman.compress()
+        self.huffman.decompress()
 
-        self.assertEqual(binary_string_after_compression_no_filling, binary_string_before_compression)
+        with open("kalevala.txt", "r", encoding="utf-8")as original_file, open("decompressed.txt", "r", encoding="utf-8")as decompressed_file:
+            original_string = original_file.read()
+            decompressed_string = decompressed_file.read()
 
-    def test_decode_string(self):
-        self.huffman_coding.compress()
-        
-        binary_string_after_compression_filling = self.huffman_coding.get_binary_string_from_compressed_file()
-        binary_string_after_compression_no_filling = self.huffman_coding.remove_filling_bits(binary_string_after_compression_filling)
-        string = self.huffman_coding.decode_string(binary_string_after_compression_no_filling)
+        assert original_string == decompressed_string
 
-        self.assertEqual(string, "Test text: \n12368")
+
+
 """
     def test_create_codes(self):
         """"""This test ensures that the characters 
@@ -163,4 +120,68 @@ class TestHuffmanCoding(unittest.TestCase):
         compressed_file_size = os.path.getsize(os.path.join(os.getcwd(), "compressed.bin"))
 
         self.assertLess(compressed_file_size,original_file_size)
+
+        def test_frequency_table(self):
+        """"""Test create_frequency_table method""""""""
+        frequence_table = self.huffman.create_frequence_table()
+        self.assertEqual(frequence_table, {"a":30000, "B":15000, "c":857000, "d":765432, "e":456777, "Ä":68, "å":73, '"':3, "(":1, " ":20034, "\n":100, "&":778276, "{":81})
+   
+    def test_create_minimum_heap(self):
+        "Test if create_mimum_heap works as expected"
+        self.huffman.create_frequence_table()
+        minimumheap = self.huffman.create_minimum_heap()
+        print(minimumheap)
+        self.assertEqual(str(heapq.heappop(self.huffman.heap)), "(:1")
+        self.assertEqual(str(heapq.heappop(self.huffman.heap)), '":3')
+        self.assertEqual(str(heapq.heappop(self.huffman.heap)), "Ä:68")
+
+
+    def test_create_a_merged_node(self):
+        self.huffman.create_frequence_table()
+        self.huffman.create_minimum_heap()
+        merged_node = self.huffman.create_merged_node()
+
+        self.assertEqual(str(merged_node), "None:4")
+
+    def test_create_huffman_tree(self):
+        """"""This test ensures that there is only one node left in the
+        huffman tree with the sum of all the nodes""""""
+        self.huffman.create_frequence_table()
+        self.huffman.create_minimum_heap()
+        huffman_tree = self.huffman.create_huffman_tree()
+
+        self.assertEqual(str(huffman_tree), "[None:2922845]")
+
+    def test_get_binary_string_from_file(self):
+        self.huffman_coding.compress()
+
+        self.huffman_coding.create_frequence_table()
+        self.huffman_coding.create_minimum_heap()
+        self.huffman_coding.create_huffman_tree()
+        self.huffman_coding.create_codes()
+        binary_string_before_compression = self.huffman_coding.create_encoded_string()
+        binary_string_before_compression = self.huffman_coding.write_remaining_bits(binary_string_before_compression)
+        binary_string_after_compression = self.huffman_coding.get_binary_string_from_compressed_file()
+        self.assertEqual(binary_string_after_compression, binary_string_before_compression)
+    
+    def test_remove_filling_bits(self):
+        self.huffman_coding.create_frequence_table()
+        self.huffman_coding.create_minimum_heap()
+        self.huffman_coding.create_huffman_tree()
+        self.huffman_coding.create_codes()
+        binary_string_before_compression = self.huffman_coding.create_encoded_string()
+        binary_string_after_compression_filling = self.huffman_coding.get_binary_string_from_compressed_file()
+
+        binary_string_after_compression_no_filling = self.huffman_coding.remove_filling_bits(binary_string_after_compression_filling)
+
+        self.assertEqual(binary_string_after_compression_no_filling, binary_string_before_compression)
+
+    def test_decode_string(self):
+        self.huffman_coding.compress()
+        
+        binary_string_after_compression_filling = self.huffman_coding.get_binary_string_from_compressed_file()
+        binary_string_after_compression_no_filling = self.huffman_coding.remove_filling_bits(binary_string_after_compression_filling)
+        string = self.huffman_coding.decode_string(binary_string_after_compression_no_filling)
+
+        self.assertEqual(string, "Test text: \n12368")
 """
