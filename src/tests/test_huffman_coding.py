@@ -1,7 +1,7 @@
 import unittest
 import os
-from huffman_coding import HuffmanCoding
-import heapq
+from huffman.compress_huffman_coding import HuffmanCodingCompress
+from huffman.decompress_huffman_coding import HuffmanCodingDecompress
 from create_test_file import FileForTesting
 
 with open(os.path.join(os.getcwd(), "test.txt"), "w") as test_file:
@@ -9,28 +9,20 @@ with open(os.path.join(os.getcwd(), "test.txt"), "w") as test_file:
 
 class TestHuffmanCoding(unittest.TestCase):
     def setUp(self):
-
-        # testing with short strings and small files (insuficcient)
-        self.path = os.path.join(os.getcwd(), "test.txt")
-        self.huffman_coding = HuffmanCoding(self.path, "test")
-        
         ## testing with bigger files
         FileForTesting() # Creates test_file.txt
-        path = os.path.join(os.getcwd(), "kalevala.txt")
-        self.huffman = HuffmanCoding(path, "test")
+        self.path = os.path.join(os.getcwd(), "kalevala.txt")
+        self.huffman_compress = HuffmanCodingCompress(self.path)
     
     def test_compress_is_smaller(self):
         """Tests if the compressed file size is at least 60 % smaller than the original file size"""
-        self.huffman.compress()
         original_file_size = os.path.getsize(os.path.join(os.getcwd(), "kalevala.txt"))
         compressed_file_size = os.path.getsize(os.path.join(os.getcwd(), "compressed.bin"))
 
         assert compressed_file_size/original_file_size <= 0.60
     
     def test_decompress_returns_original_file_content(self):
-        self.huffman.compress()
-        self.huffman.decompress()
-
+        HuffmanCodingDecompress(self.path)
         with open("kalevala.txt", "r", encoding="utf-8")as original_file, open("decompressed.txt", "r", encoding="utf-8")as decompressed_file:
             original_string = original_file.read()
             decompressed_string = decompressed_file.read()
@@ -40,6 +32,11 @@ class TestHuffmanCoding(unittest.TestCase):
 
 
 """
+       
+        # testing with short strings and small files (insuficcient)
+        self.path = os.path.join(os.getcwd(), "test.txt")
+        self.huffman_coding = HuffmanCoding(self.path, "test")
+
     def test_create_codes(self):
         """"""This test ensures that the characters 
         get correct codes according to their frequency.""""""
