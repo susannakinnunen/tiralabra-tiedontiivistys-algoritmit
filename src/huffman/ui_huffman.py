@@ -1,3 +1,4 @@
+"""This is a preliminary user interface for file compression and decompression."""
 from compress_huffman_coding import HuffmanCodingCompress
 from decompress_huffman_coding import HuffmanCodingDecompress
 
