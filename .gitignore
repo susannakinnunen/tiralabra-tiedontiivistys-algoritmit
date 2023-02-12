@@ -1,6 +1,5 @@
 *.txt
 !kalevala.txt
-!loremipsum.txt
 src/__pycache__/
 src/tests/__pycache__/
 src/huffman/__pycache__/
