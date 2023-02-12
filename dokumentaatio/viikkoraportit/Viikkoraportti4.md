@@ -10,8 +10,9 @@ Haastetta oli myös käyttöliittymän ajamisessa komentoriviltä. Käyttöliitt
 Tällä viikolla yritin tehdä myös aikaisempia viikkoja parempia testejä. Loin isohkon "siansaksa"-tiedoston, johon pystyin itse määrittämään merkit ja niiden frekvenssit. Näin ollen pystyin testaamaan funktioita isolla tiedostolla.
 Kun ohjelman toiminnallisuus alkoi olla valmis, niin pystyin kokeilemaan end-to-end -testausta englanninkielisen kalevala.txt-tiedoston avulla.
 
+Käytetty aika: 25 tuntia
+
 ### Seuraava viikko
 
 Seuravaalla viikolla siirryn LZ77-algoritmin pariin.
 
-Käytetty aika: 25 tuntia
