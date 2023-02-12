@@ -24,15 +24,3 @@ Huffmania on myös testattu itseluodulla "siansaksa"-tiedostolla ja hyvin pienil
 
 ## Miten testit voidaan toistaa?
 Testit voi toistaa komentorivillä menemällä ohjelman juurikansioon ja ajamalla koodin ```poetry run pytest src```.
-
-## Käyttöohjeet
-
-Huffman-ohjelman voi ajaa esimerkiksi Visual Studio Codessa ajamalla ui_huffman.py -tiedoston. Tällä hetkellä (12.2.) ohjelma ei valitettavasti käynnisty python3-kääntäjällä juurikansiossa komennolla ```python3 src/huffman/ui_huffman.py```. Tämä onnistuu muutamalla muokkauksella ohjelmantiedostoihin, mutta silloin testit eivä toimi. Jos haluaa kokeilla ohjelmaa komentoriviltä, niin laitan tarvittaviin muokkauksiin ohjeet alle.
-
-Ohjelma hyväksyy .txt-tiedostoja.
-
-#### Ohjelman käynnistäminen komentoriviltä (12.2.)
-
-Jos haluaa ajaa ohjelman komentorivillä ```python3 src/huffman/ui_huffman.py```, niin silloin tulee poistaa kaikkien huffman-kansion alla olevien moduulien from import -kohdista kohta huffman. Esimerkiksi ui_huffman.py -tiedoston toinen rivi tulisi muokata "from **huffman**.compress_huffman_coding import HuffmanCodingCompress" muotoon "from compress_huffman_coding import HuffmanCodingCompress". Jos nämä huffman-merkinnät poistaa kaikista kansion moduulien "from import"-kohdista, niin ohjelma toimii python3-kääntäjällä juurikansiossa komennolla ```python3 src/huffman/ui_huffman.py```. Tällöin kuitenkaan testit eivät toimi, ja niitä varten **huffman.** pitää lisätä "from import"-kohtaan. 
-
-Toivottavasti tähän epäkäytännöllisyyteen löytyy pian ratkaisu.
