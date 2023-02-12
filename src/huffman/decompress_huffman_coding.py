@@ -22,7 +22,9 @@ class HuffmanCodingDecompress(HuffmanCodingCompress):
         # replace the codes with the help of self.character codes
         decoded_string = self.decode_string(binary_string)
         # 4. save the decoded string
-        self.create_decompressed_file(decoded_string)
+        decompressed_file = self.create_decompressed_file(decoded_string)
+
+        return decompressed_file
 
 
     def get_binary_string_from_compressed_file(self):

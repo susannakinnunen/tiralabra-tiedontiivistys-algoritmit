@@ -26,7 +26,8 @@ class HuffmanCodingCompress(HuffmanCodingInitial):
         self.create_huffman_tree()
         self.create_codes()
         encoded_string = self.create_encoded_string()
-        self.create_compressed_file(encoded_string)
+        compressed_file = self.create_compressed_file(encoded_string)
+        return compressed_file
 
     def get_string_from_file(self, path):
         """Gets a path to a file as a parameter and returns
