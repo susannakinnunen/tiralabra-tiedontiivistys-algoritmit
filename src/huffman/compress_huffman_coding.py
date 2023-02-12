@@ -10,13 +10,13 @@ class HuffmanCodingCompress(HuffmanCodingInitial):
     Creates a file called compressed.bin of the original file
     in the root directoryof the program."""
 
-    def __init__(self, path):
+    def __init__(self, path, test_small_files = None):
         super().__init__()
         self.path = path
         self.string = self.get_string_from_file(self.path)
         self.heap = []
-
-        self.compress()
+        if test_small_files is None:
+            self.compress()
 
     def compress(self):
         """Calls for all the needed functions in the right order
@@ -37,9 +37,7 @@ class HuffmanCodingCompress(HuffmanCodingInitial):
 
     def create_frequence_table(self):
         """Creates a frequence table for the characters in a string/text"""
-        index = 0
         for character in self.string:
-            index += 1
             if not character in self.frequence_table:
                 self.frequence_table[character] = 0
             self.frequence_table[character] += 1
@@ -126,6 +124,7 @@ class HuffmanCodingCompress(HuffmanCodingInitial):
             binary_file.write(byte_list)
 
         return binary_file
+
     def write_remaining_bits(self, encoded_string):
         """Makes the encoded string divisible by 8,
         so that it can be later converted into bytes"""
