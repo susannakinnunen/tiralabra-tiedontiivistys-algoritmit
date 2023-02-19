@@ -9,9 +9,9 @@ class LZ77:
         """A search window is the list of already seen characters from
         where we are looking for matches for the the characters
         in the look-ahead window. The integers assigned for the variables are
-        lengths of the windows in bits. These can be changed later,
-        the fixed lengths are just for
-        the start of the development project."""
+        the sizes. This means, that there can be
+        1024 characters in the search_window and 15 in the lookahead_window.
+        """
         self.search_window = 1024
         self.lookahead_window = 15
         self.path = path
@@ -34,7 +34,7 @@ class LZ77:
 
     def compress(self):
         """Goes through the to be compressed string and
-        calls for all the methods needed for its compression.
+        calls for all the methods needed for the string's compression.
         """
         i = 0
         while i < len(self.string):
@@ -51,8 +51,8 @@ class LZ77:
 
     def search_longest_match(self, current_index):
         """Finds the longest match in the search_window for
-        the next characters in the lookahead_window.
-        Returns a tuple match = (d, l, c).
+        the characters in the lookahead_window.
+        Returns a tuple = (d, l, c).
         d = The distance to the start of the match,
         l = the lenght of the match,
         c = the next character in the lookahead table that was not
@@ -96,7 +96,7 @@ class LZ77:
 
     def convert_into_bit_string(self, list_of_tuples):
         """This method converts the compressed information
-        from the tuples (d, l, c) into a string of bit.
+        from the tuples (d, l, c) into a string of bits.
 
         Distance will be given 10 bits, because 2^10 = 1024
         and the size of the search windows is 1024 characters.
@@ -105,7 +105,7 @@ class LZ77:
         Length  will be given 6 bits, 2^6 = 64,
         so the match can be 64 characters long.
 
-        Next character is given a byte.
+        Character is given a byte.
 
         If distance is equal to 0,
         only a next character is added to the bit string.
