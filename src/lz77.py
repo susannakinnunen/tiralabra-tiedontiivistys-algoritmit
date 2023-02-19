@@ -42,9 +42,12 @@ class LZ77:
             self.compressed_info_list.append(longest_match)
             i += longest_match[1]
 
-        self.convert_into_bit_string(self.compressed_info_list)
+        bit_string = self.convert_into_bit_string(self.compressed_info_list)
+        byte_list = self.convert_into_bytes(bit_string)
+        self.create_compressed_file(byte_list)
 
         return self.compressed_info_list
+        # returns the list for testing purposes
 
     def search_longest_match(self, current_index):
         """Finds the longest match in the search_window for
@@ -115,10 +118,26 @@ class LZ77:
             if distance == 0:
                 bit_string = bit_string + "0" + str(bin(ord(character)))[2:].zfill(7)#pylint:disable=line-too-long
                 # [2:] <- when converting to bits python adds 0b in front,
-                # so that needs to be removed
+                # so that needs to be ignored
             else:
                 bit_string = bit_string + "1" + str(bin(distance))[2:].zfill(10) + str(bin(length))[2:].zfill(6) + str(bin(character))[2:].zfill(7)#pylint:disable=line-too-long
                 # didn't know how to divide those operations to separate rows,
                 # that's why pylint-disable used
 
         return bit_string
+
+    def convert_into_bytes(self, bit_string):
+        """Creates a list of bytes from the bit_string
+        """
+        byte_list = bytearray()
+        for i in range(0, len(bit_string), 8):
+            byte = bit_string[i:i+8]
+            byte_list.append(int(byte, 2))
+        return byte_list
+
+    def create_compressed_file(self, byte_list):
+        """Writes the the compressed information to a .bin file"""
+        with open("lz77_compressed.bin", "wb") as binary_file:
+            binary_file.write(byte_list)
+
+        return binary_file
