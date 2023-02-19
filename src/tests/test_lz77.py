@@ -9,6 +9,7 @@ class TestLZ77Coding(unittest.TestCase):
     def setUp(self):
         self.path = os.path.join(os.getcwd(), "test_lz77.txt")
         self.lz77 = LZ77(self.path, True)
+        self.compressed_info_list = self.lz77.compress()
 
     def test_get_string_from_file(self):
         """Test get_string_from_file method"""     
@@ -17,8 +18,10 @@ class TestLZ77Coding(unittest.TestCase):
         self.assertEqual(string, "ABBAABBABB")
 
     def test_compress_and_search_longest_match(self):
-        compressed_info_list = self.lz77.compress()
-
-        self.assertEqual(compressed_info_list, [(0, 1,"A"), (0, 1,"B"), (0, 1,"B"), (0, 1,"A"), (4, 4, 0), (3, 2, 0)])
+        self.assertEqual(self.compressed_info_list, [(0, 1,"A"), (0, 1,"B"), (0, 1,"B"), (0, 1,"A"), (4, 4, 0), (3, 2, 0)])
 
 
+    def test_compress_and_convert_into_tuples_to_bit_string(self):
+        bit_string = self.lz77.convert_into_bit_string(self.compressed_info_list)
+
+        self.assertEqual(bit_string, "01000001010000100100001001000001100000001000001000000000100000000110000100000000")
