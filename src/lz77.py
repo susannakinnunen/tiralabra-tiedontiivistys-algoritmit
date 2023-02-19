@@ -22,6 +22,16 @@ class LZ77:
         if test is False:
             self.compress()
 
+
+    def get_string_from_file(self, path):
+        """Gets a path to a file as a parameter and
+        returns a string of the file content"""
+        with open(path, "r", encoding="utf-8") as file:
+            string = file.read()
+            string = string.strip()
+
+        return string
+
     def compress(self):
         """Goes through the to be compressed string and
         calls for all the methods needed for its compression.
@@ -32,16 +42,9 @@ class LZ77:
             self.compressed_info_list.append(longest_match)
             i += longest_match[1]
 
+        self.convert_into_bit_string(self.compressed_info_list)
+
         return self.compressed_info_list
-
-    def get_string_from_file(self, path):
-        """Gets a path to a file as a parameter and
-        returns a string of the file content"""
-        with open(path, "r", encoding="utf-8") as file:
-            string = file.read()
-            string = string.strip()
-
-        return string
 
     def search_longest_match(self, current_index):
         """Finds the longest match in the search_window for
@@ -87,3 +90,35 @@ class LZ77:
             match = (0,1, self.string[start_index_of_lookahead])
 
         return match
+
+    def convert_into_bit_string(self, list_of_tuples):
+        """This method converts the compressed information
+        from the tuples (d, l, c) into a string of bit.
+
+        Distance will be given 10 bits, because 2^10 = 1024
+        and the size of the search windows is 1024 characters.
+        This means the match can be found from 1024 characters away.
+
+        Length  will be given 6 bits, 2^6 = 64,
+        so the match can be 64 characters long.
+
+        Next character is given a byte.
+
+        If distance is equal to 0,
+        only a next character is added to the bit string.
+        """
+
+        bit_string = ""
+
+        for element in list_of_tuples:
+            distance, length, character = element
+            if distance == 0:
+                bit_string = bit_string + "0" + str(bin(ord(character)))[2:].zfill(7)#pylint:disable=line-too-long
+                # [2:] <- when converting to bits python adds 0b in front,
+                # so that needs to be removed
+            else:
+                bit_string = bit_string + "1" + str(bin(distance))[2:].zfill(10) + str(bin(length))[2:].zfill(6) + str(bin(character))[2:].zfill(7)#pylint:disable=line-too-long
+                # didn't know how to divide those operations to separate rows,
+                # that's why pylint-disable used
+
+        return bit_string
