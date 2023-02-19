@@ -5,7 +5,7 @@ class LZ77:
     """
     File compressing and decompressing algorithm
     """
-    def __init__(self, path):
+    def __init__(self, path, test = False):
         """A search window is the list of already seen characters from
         where we are looking for matches for the the characters
         in the look-ahead window. The integers assigned for the variables are
@@ -19,7 +19,8 @@ class LZ77:
         self.compressed_info_list = []
         # list containing information
         # about compressed characters and matches
-        self.compress()
+        if test is False:
+            self.compress()
 
     def compress(self):
         """Goes through the to be compressed string and
@@ -31,6 +32,7 @@ class LZ77:
             self.compressed_info_list.append(longest_match)
             i += longest_match[1]
 
+        return self.compressed_info_list
 
     def get_string_from_file(self, path):
         """Gets a path to a file as a parameter and
