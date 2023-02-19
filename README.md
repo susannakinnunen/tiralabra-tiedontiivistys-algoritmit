@@ -10,6 +10,7 @@
 - [Viikko 2](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti2.md)
 - [Viikko 3](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti3.md)
 - [Viikko 4](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti4.md)
+- [Viikko 5](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/viikkoraportit/Viikkoraportti5.md)
 
 
 ![GitHub Actions](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/workflows/CI/badge.svg)
