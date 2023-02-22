@@ -6,7 +6,7 @@
 3. Asenna riippuvuudet: ```poetry install```
 4. Aja Huffmanin ohjelma juurikansiosta: ```poetry run python3 src/ui_huffman.py``` ja LZ77 ohjelma: ```poetry run python3 src/ui_lz77.py```
  - Anna syötteenä .txt-tiedoston polku.
-    - voit käyttää esimerkiksi kalevala.txt-tiedostoa, joka löytyy juurikansiosta (Huom. Tällä hetkellä (22.2.) LZ77 vasta kompressoi.)
+    - voit käyttää esimerkiksi kalevala.txt-tiedostoa, joka löytyy juurikansiosta (Huom. Toistaiseksi LZ77 vasta kompressoi ja toimii hyvin hitaasti isojen tiedostojen kanssa.)
  - Ohjelma kertoo, mistä polusta löydät kompressoidun ja dekompressoidun version alkuperäisestä tiedostosta. 
  
 ## Testit
