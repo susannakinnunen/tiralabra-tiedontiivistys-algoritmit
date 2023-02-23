@@ -9,10 +9,10 @@ class LZ77:
         """A search window is the list of already seen characters from
         where we are looking for matches for the the characters
         in the look-ahead window. The integers assigned for the variables are
-        the sizes. This means, that there can be
-        1024 characters in the search_window and 15 in the lookahead_window.
+        the sizes of the windows. This means, that there is
+        4095 characters in the search_window and 15 in the lookahead_window.
         """
-        self.search_window = 1024
+        self.search_window = 4095
         self.lookahead_window = 15
         self.path = path
         self.string = self.get_string_from_file(path)
@@ -98,14 +98,15 @@ class LZ77:
         """This method converts the compressed information
         from the tuples (d, l, c) into a string of bits.
 
-        Distance will be given 10 bits, because 2^10 = 1024
-        and the size of the search windows is 1024 characters.
-        This means the match can be found from 1024 characters away.
+        Distance will be given 12 bits, because 2^12 = 4096
+        and the size of the search window is 4095 characters.
+        This means the match can be found from up to 4095 characters away.
 
-        Length  will be given 6 bits, 2^6 = 64,
-        so the match can be 64 characters long.
+        Length  will be given 4 bits, 2^4 = 16. The
+        lookahead window is 15 characters, so the maximum
+        match of 15 characters will fit in that amount.
 
-        Character is given a byte.
+        Character is given seven bits.
 
         If distance is equal to 0,
         only a next character is added to the bit string.
@@ -120,7 +121,7 @@ class LZ77:
                 # [2:] <- when converting to bits python adds 0b in front,
                 # so that needs to be ignored
             else:
-                bit_string = bit_string + "1" + str(bin(distance))[2:].zfill(10) + str(bin(length))[2:].zfill(6) + str(bin(character))[2:].zfill(7)#pylint:disable=line-too-long
+                bit_string = bit_string + "1" + str(bin(distance))[2:].zfill(12) + str(bin(length))[2:].zfill(4) + str(bin(character))[2:].zfill(7)#pylint:disable=line-too-long
                 # didn't know how to divide those operations to separate rows,
                 # that's why pylint-disable used
 
