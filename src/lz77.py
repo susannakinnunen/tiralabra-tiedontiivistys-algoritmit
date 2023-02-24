@@ -1,3 +1,5 @@
+import os
+
 """
     File compressing and decompressing algorithm
 """
@@ -142,3 +144,23 @@ class LZ77:
             binary_file.write(byte_list)
 
         return binary_file
+
+    def decompress(self):
+        """Calls for all the methods needed for decompressing a binaryfile."""
+        # 1 .read and save binary file in the given path
+        binary_string = self.get_binary_string_from_compressed_file()
+
+    def get_binary_string_from_compressed_file(self):
+        """Fetches a binary string from the compressed file"""
+        # 1 .read binary file in the given path
+        binary_string = ""
+        with open(os.path.join(
+            os.getcwd(), "lz77_compressed.bin"), "rb"
+            ) as file:
+            row_from_file = file.read(1)
+            while len(row_from_file) > 0:
+                row_from_file = ord(row_from_file)
+                bits = bin(row_from_file)[2:].rjust(8, "0")
+                binary_string += bits
+                row_from_file = file.read(1)
+        return binary_string
