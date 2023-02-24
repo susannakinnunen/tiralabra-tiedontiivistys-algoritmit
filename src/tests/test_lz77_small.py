@@ -24,15 +24,15 @@ class TestLZ77Coding(unittest.TestCase):
     def test_compress_and_convert_into_tuples_to_bit_string(self):
         bit_string = self.lz77.convert_into_bit_string(self.compressed_info_list)
 
-        self.assertEqual(bit_string, "01000001010000100100001001000001100000000010001000000000100000000001100100000000")
+        self.assertEqual(bit_string, "0000000001000001000000000100001000000000010000100000000001000001100000000010001000000000100000000001100100000000")
 
     
     def test_convert_into_bytes(self):
         bit_string = self.lz77.convert_into_bit_string(self.compressed_info_list)
         byte_list = self.lz77.convert_into_bytes(bit_string)
 
-        self.assertEqual(bit_string, "01000001010000100100001001000001100000000010001000000000100000000001100100000000")
+        self.assertEqual(bit_string, "0000000001000001000000000100001000000000010000100000000001000001100000000010001000000000100000000001100100000000")
 
-        self.assertEqual(str(byte_list), """bytearray(b'ABBA\\x80"\\x00\\x80\\x19\\x00')""" )
+        self.assertEqual(str(byte_list), 'bytearray(b\'\\x00A\\x00B\\x00B\\x00A\\x80"\\x00\\x80\\x19\\x00\')')
 
 

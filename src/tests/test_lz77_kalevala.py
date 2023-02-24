@@ -13,7 +13,7 @@ class TestLZ77Coding(unittest.TestCase):
         original_file_size = os.path.getsize(os.path.join(os.getcwd(), "kalevala.txt"))
         compressed_file_size = os.path.getsize(os.path.join(os.getcwd(), "lz77_compressed.bin"))
 
-        assert compressed_file_size/original_file_size <= 0.61
+        assert compressed_file_size/original_file_size <= 0.70
 
     def test_decompressed_is_same_as_original(self):
         with open("kalevala.txt", "r", encoding="utf-8")as original_file, open("lz77_decompressed.txt", "r", encoding="utf-8")as decompressed_file:
