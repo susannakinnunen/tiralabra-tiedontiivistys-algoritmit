@@ -119,10 +119,16 @@ class LZ77:
         for element in list_of_tuples:
             distance, length, character = element
             if distance == 0:
+                # if distance == 0, 
+                # it means the character did not have a match
+                # --> bitstring will start with "0"
                 bit_string = bit_string + "0" + str(bin(ord(character)))[2:].zfill(7)#pylint:disable=line-too-long
                 # [2:] <- when converting to bits python adds 0b in front,
                 # so that needs to be ignored
             else:
+                # character had a match and 
+                # the following bit string starts with "1", 
+                # to distinguish from a non-match.
                 bit_string = bit_string + "1" + str(bin(distance))[2:].zfill(12) + str(bin(length))[2:].zfill(4) + str(bin(character))[2:].zfill(7)#pylint:disable=line-too-long
                 # didn't know how to divide those operations to separate rows,
                 # that's why pylint-disable used
@@ -149,6 +155,8 @@ class LZ77:
         """Calls for all the methods needed for decompressing a binaryfile."""
         # 1 .read and save binary file in the given path
         binary_string = self.get_binary_string_from_compressed_file()
+        # 2. decode the string
+        decoded_string = self.decode_bit_string(binary_string)
 
     def get_binary_string_from_compressed_file(self):
         """Fetches a binary string from the compressed file"""
@@ -164,3 +172,60 @@ class LZ77:
                 binary_string += bits
                 row_from_file = file.read(1)
         return binary_string
+    
+    def decode_bit_string(self, binary_string):
+        """Decodes bitstring into characters"""
+        tuples_list = self.get_tuples(binary_string)
+        
+        decompressed_string = ""
+        for element in tuples_list:
+            distance, length, character = element
+            if distance == 0:
+                decompressed_string += character
+            else:
+                matching_characters = decompressed_string[-(distance):]
+                matching_characters = matching_characters[:length]
+                decompressed_string += matching_characters
+
+        return decompressed_string
+    
+    def get_tuples(self, binary_string):
+        """Creates a list of (distance, length, character)
+        tuples from the binarystring"""
+        self.compressed_info_list = []
+        i = 0
+        while i < len(binary_string) - 1:
+            short_string = binary_string[i+1:i+8]
+            # Short string is a seven bits long string 
+            # cut from the binary string
+            if binary_string[i] == "0":
+            # if binary_string[i] == "0", it means this character
+            # did not have a match 
+            # to understand better see function convert_into_bit_string
+                distance = 0
+                length = 1
+                character_int = int(short_string, 2)
+                # short_string is converted into an integer
+                # which works as Unicode code integer
+                character = chr(character_int)
+                # chr() returns a character from the code integer
+                i += 8
+                # a bitstring with
+                # no match is 8 bits long altogether with the code "0"
+                # in the beginning thus we can now move 8 bits forward in 
+                # the binary_string
+                self.compressed_info_list.append((distance, length, character))
+            else:
+                # this means binary_string[i] == "1"
+                # thus there's distance and length in
+                # the following 24 bits
+                # distance has 12 bits, length 4 and
+                # character has 8 zeros to signal the charcter(s) is found
+                # with the help of distance and length 
+                # (in the decode_bit_string function)
+                distance = int(binary_string[i+1:i+13], 2)
+                length = int(binary_string[i+13:i+17], 2)
+                character = ""
+                i += 24
+                self.compressed_info_list.append((distance, length, character))
+        return self.compressed_info_list
