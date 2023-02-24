@@ -157,6 +157,10 @@ class LZ77:
         binary_string = self.get_binary_string_from_compressed_file()
         # 2. decode the string
         decoded_string = self.decode_bit_string(binary_string)
+        # 3. save the decoded string
+        decompressed_file = self.create_decompressed_file(decoded_string)
+
+        return decompressed_file
 
     def get_binary_string_from_compressed_file(self):
         """Fetches a binary string from the compressed file"""
@@ -229,3 +233,12 @@ class LZ77:
                 i += 24
                 self.compressed_info_list.append((distance, length, character))
         return self.compressed_info_list
+    
+    def create_decompressed_file(self, decoded_string):
+        """Writes the decoded string into lz77_decompressed.txt file."""
+        with open(
+            "lz77_decompressed.txt", "w", encoding="utf-8"
+            )as decompressed_file:
+            decompressed_file.write(decoded_string)
+
+        return decompressed_file
