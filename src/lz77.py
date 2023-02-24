@@ -109,10 +109,11 @@ class LZ77:
         lookahead window is 15 characters, so the maximum
         match of 15 characters will fit in that amount.
 
-        Character is given seven bits.
+        Character is given fifteen bits if there wasn't a match.
+        If there was a match, character is given 7 bits.
 
         If distance is equal to 0,
-        only a next character is added to the bit string.
+        only the character is added to the bit string.
         """
 
         bit_string = ""
@@ -123,7 +124,7 @@ class LZ77:
                 # if distance == 0,
                 # it means the character did not have a match
                 # --> bitstring will start with "0"
-                bit_string = bit_string + "0" + str(bin(ord(character)))[2:].zfill(7)#pylint:disable=line-too-long
+                bit_string = bit_string + "0" + str(bin(ord(character)))[2:].zfill(15)#pylint:disable=line-too-long
                 # [2:] <- when converting to bits python adds 0b in front,
                 # so that needs to be ignored
             else:
@@ -200,7 +201,7 @@ class LZ77:
         self.compressed_info_list = []
         i = 0
         while i < len(binary_string) - 1:
-            short_string = binary_string[i+1:i+8]
+            short_string = binary_string[i+1:i+16]
             # Short string is a seven bits long string
             # cut from the binary string
             if binary_string[i] == "0":
@@ -214,10 +215,10 @@ class LZ77:
                 # which works as Unicode code integer
                 character = chr(character_int)
                 # chr() returns a character from the code integer
-                i += 8
+                i += 16
                 # a bitstring with
-                # no match is 8 bits long altogether with the code "0"
-                # in the beginning thus we can now move 8 bits forward in
+                # no match is 16 bits long altogether with the first bit "0"
+                # in the beginning, thus we can now move 16 bits forward in
                 # the binary_string
                 self.compressed_info_list.append((distance, length, character))
             else:
