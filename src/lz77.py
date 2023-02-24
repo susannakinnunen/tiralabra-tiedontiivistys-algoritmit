@@ -44,7 +44,7 @@ class LZ77:
             longest_match = self.search_longest_match(i)
             self.compressed_info_list.append(longest_match)
             i += longest_match[1]
-        print(self.compressed_info_list[32:47])
+
         bit_string = self.convert_into_bit_string(self.compressed_info_list)
         byte_list = self.convert_into_bytes(bit_string)
         self.create_compressed_file(byte_list)
@@ -182,7 +182,7 @@ class LZ77:
     def decode_bit_string(self, binary_string):
         """Decodes bitstring into characters"""
         tuples_list = self.get_tuples(binary_string)
-        print("d", tuples_list[32:47])
+
         decompressed_string = ""
         for element in tuples_list:
             distance, length, character = element
