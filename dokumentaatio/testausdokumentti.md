@@ -9,13 +9,7 @@ Sekä Huffman- että LZ77 -algoritmeja on testattu yksikkö- ja suorituskykytest
 Yksikkötestauksen kattavuusraportti on löydettävissä täältä:
 [![codecov](https://codecov.io/gh/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/branch/main/graph/badge.svg?token=KEMF99W3XG)](https://codecov.io/gh/susannakinnunen/tiralabra-tiedontiivistys-algoritmit)
 
-Kuvat testauksen kattavuusraportista 4.-, 12.-, ja 19.2.:
-
-![Testikattavuusraportti-kuva 4.2.](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/Coveragereport%20from%202023-02-04%2011-21-23.png)
-
-![Testikattavuusraportti-kuva 12.2.](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/Coverage_report%20from%202023-02-12%2013-43-30.png)
-
-![Testikattavuusraportti-kuva 19.2.](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/Coveragereport%20from%202023-02-19%2020-54-05.png)
+Kuva testauksen kattavuusraportista 25.2.:
 
 ![Testikattavuusraportti-kuva 25.2.](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/Coverage%20report%202023-02-25%2017-26-06.png)
 
@@ -72,3 +66,21 @@ Taulukon sarakkeiden nimet viittaavat seuraaviin asioihin:
 - funktion tiedot
 
 lähde: https://docs.python.org/3/library/profile.html
+
+### Suorituskykytestaus tulokset 25.2.
+
+**Huffman kompressointi**
+
+![Huffman kompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/huffman%20compress%202023-02-25%2014-25-11.png)
+
+**Huffman dekompressointi**
+
+![Huffman dekompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/huffman%20decompress%202023-02-25%2014-31-02.png)
+
+**LZ77 kompressointi**
+
+![LZ77 kompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/lz77%20compression%202023-02-25%2014-27-47.png)
+
+**LZ77 dekompressointi**
+
+![LZ77 dekompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/lz77%202023-02-25%2014-33-11.png)
