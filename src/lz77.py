@@ -113,7 +113,7 @@ class LZ77:
         If there was a match, character is given 7 bits.
 
         If distance is equal to 0,
-        only the character is added to the bit string.
+        only the character is added to the bit string with 15 bits.
         """
 
         bit_string = ""
