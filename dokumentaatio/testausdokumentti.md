@@ -51,24 +51,24 @@ Ensimmäisessä taulukossa on kompressointiin liittyvää statistiikkaa ja toise
 
 Ensimmäisellä rivillä lukee kuinka monta funktiokutsua on tehty ja missä ajassa.
 
-Taulukon otsikot viittaavat seuraaviin asioihin:
+Taulukon sarakkeiden nimet viittaavat seuraaviin asioihin:
 
-ncalls
-kutsujen määrä
+**ncalls**
+- kutsujen määrä
 
-tottime
-koko aika käytetty tähän funktioon, poislukien alifunktioiden kutsuissa mennyt aika
+**tottime**
+- koko aika käytetty tähän funktioon, poislukien alifunktioiden kutsuissa mennyt aika
 
-percall
-tottime ja ncalls jakolaskun osamäärä
+**percall**
+- tottime ja ncalls jakolaskun osamäärä
 
-cumtime
-kumulatiivinen aika käytetty kyseiseen funktioon ja sen alifunktioihin
+**cumtime**
+- kumulatiivinen aika käytetty kyseiseen funktioon ja sen alifunktioihin
 
-percall
-cumtimen ja primitiivisten kutsujen (ei rekursiiviset kutsut) osamäärä
+**percall**
+- cumtimen ja primitiivisten kutsujen (ei rekursiiviset kutsut) osamäärä
 
-filename:lineno(function)
-funktion tiedot
+**filename:lineno(function)**
+- funktion tiedot
 
 lähde: https://docs.python.org/3/library/profile.html
