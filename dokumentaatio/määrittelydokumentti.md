@@ -1,6 +1,6 @@
 # Määrittelydokumentti
 
-Toteutan Huffmanin ja Lempel-Zivin (LZ77) algoritmit, jotka ovat häviöttömiä tiedonpakkausalgoritmeja. Tavoitteena on, että pakattavaksi tiedostoksi voi antaa minkä tahansa tiedoston ja, että pakattu tiedosto olisi reilusti pienempi kuin alkuperäinen (tekstitiedostot 40-60%).
+Toteutan Huffmanin ja Lempel-Zivin (LZ77) algoritmit, jotka ovat häviöttömiä tiedonpakkausalgoritmeja. Tavoitteena on, että pakattavaksi tiedostoksi voi antaa minkä tahansa tekstitiedoston ja, että pakattu tiedosto olisi reilusti pienempi kuin alkuperäinen (tekstitiedostot 40-60%).
 Lähtökohdat aikavaatimuksille: Huffmanin algoritmi O(nlog n) ja LZ77 O(n).
 
 Valitsin kyseiset algoritmit, sillä niiden kautta pääsen oppimaan uutta ja myöskin käytännössä soveltamaan aiemmilta algoritmikursseilta opittuja teoreettisia malleja.

@@ -1,6 +1,10 @@
 # Testausdokumentti
 
-## Yksikkötestauksen kattavuusraportti
+Sekä Huffman- että LZ77 -algoritmeja on testattu yksikkö- ja suorituskykytestein.
+
+## Yksikkötestaus
+
+### Yksikkötestauksen kattavuusraportti ja kuvat
 
 Yksikkötestauksen kattavuusraportti on löydettävissä täältä:
 [![codecov](https://codecov.io/gh/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/branch/main/graph/badge.svg?token=KEMF99W3XG)](https://codecov.io/gh/susannakinnunen/tiralabra-tiedontiivistys-algoritmit)
@@ -15,20 +19,55 @@ Kuvat testauksen kattavuusraportista 4.-, 12.-, ja 19.2.:
 
 
 
-## Mitä on testattu, miten tämä tehtiin?
+### Mitä on testattu, miten tämä tehtiin?
 
-Projekti koostuu kokonaisuudessaan kahdesta eri algoritmista, jotka ovat Huffman- ja LZ77 -tiedontiivistysalgoritmit. Tällä hetkellä Huffmanin algoritmiin perustuva ohjelma on lähes valmis ja LZ77-ohjelmaa pystyy vain kompressoimaan. 
+Projekti koostuu kokonaisuudessaan kahdesta eri algoritmista, jotka ovat Huffman- ja LZ77 -tiedontiivistysalgoritmit.
 
-Huffmanin algoritmiin perustuva ohjelma on testattu yksikkötestein pytest-kirjaston avulla. Ohjelman kaikki funktiot on testattu (paitsi käyttöliittymän eli ui_huffman.py-tiedoston sisältö). Ohjelman toimivuutta on myös testattu end-to-end -testauksella. Tämä tarkoittaa sitä, että testit tarkistavat onko alkuperäisen tekstitiedoston sisältö sama kuin dekompressoidun. Testit tarkistavat myös, että kompressoitutiedosto on kooltaan vähintään 40% pienenmpi kuin alkuperäinen. 
+Molempia algoritmeja on testattu yksikkötestein pytest-kirjaston avulla. Pytest-kirjastoa on käytetty myös end-to-end -testauksessa. End-to-end -testit tarkastavat onko alkuperäisen tekstitiedoston sisältö sama kuin dekompressoidun. Lisäksi kyseiset testit tarkastavat, onko Huffmanin algoritmilla kompressoitu tiedosto vähintään 40% pienempi kuin alkuperäinen ja LZ77-algoritmin kohdalla tarkistetaan onko kompressoitu tiedosto vähintään 30% pienempi.
 
-LZ77-algoritimiin perustuvaa ohjelman funktioita testataan pytest-kirjaston avulla yksikkötestein.
+### Minkälaisilla syötteillä testaus tehtiin?
 
-## Minkälaisilla syötteillä testaus tehtiin?
-Huffmanin algoritmin end-to-end -toiminnallisuutta sekä kompressoidun tiedoston pienemmyyttä on testattu englanninkielisellä Kalevalalla. Jo pelkästään näillä testeillä saadaan testattua kaikkia funktioita. Tämä testaaminen löytyy polusta src/tests/test_huffman_coding_kalevala.py.
+Molempien algoritmien end-to-end -toiminnallisuutta sekä kompressoidun tiedoston pienemmyyttä on testattu englanninkielisellä Kalevalalla. Jo pelkästään näillä testeillä saadaan testattua kaikkia funktioita. Nämä testit löytyvät poluista src/tests/test_huffman_coding_kalevala.py ja src/tests/test_lz77_kalevala.py.
 
-Huffmania on myös testattu itseluodulla "siansaksa"-tiedostolla ja hyvin pienillä merkkijonoilla tiedostossa src/tests/test_huffman_coding_small_and_nonsense.py. Näitä testejä on tehty saman aikaisesti ohjelman kanssa. Vaikka näiden testien merkityksellisyys lopullisen ohjelman toimivuuden kannalta voi olla turhaa, niin niistä oli paljon apua yksittäisten funktioiden toimivuuden ja toiminnallisuuden selvittämisessä ohjelmaa tehdessä.
+Algoritmeja testataan myös isommalla (2.9 MB) itseluodulla "siansaksa"-tiedostolla ja hyvin pienillä merkkijonoilla tiedostossa src/tests/test_huffman_coding_small_and_nonsense.py sekä src/tests/test_lz77_small_and_nonsense.py . Näitä testejä on tehty saman aikaisesti ohjelmien kanssa. Näistä testeistä oli paljon hyötyä yksittäisten funktioiden toimivuuden ja toiminnallisuuksien selvittämisessä ohjelmaa tehdessä.
 
-LZ77-algoritmia testataan hyvin lyhyellä tekstinpätkällä. Tämä ei ilmiselvästi ole ohjelman toimivuutta kunnolla testaava tapa, mutta se on tässä vaiheessa tehty niin, jotta yksittäisten funktioiden toimivuutta pystyy testaamaan. LZ77-algoritmia tullaan testaamaan isommilla syötteillä, kun ohjelma on valmis.
-
-## Miten testit voidaan toistaa?
+### Miten testit voidaan toistaa?
 Testit voi toistaa komentorivillä menemällä ohjelman juurikansioon ja ajamalla koodin ```poetry run pytest src```.
+
+
+## Suorituskykytestaus
+
+Suorituskykytestausta on tehty Pythonin cProfile kirjaston avulla. 
+Huffmanin algoritmiin liittyvät testit voi ajaa juurikansiossa komentoriviltä kommennolla:
+
+```poetry run python3 src/performance_test/huffman_performance.py```
+
+ja LZ77-algoritmin komennolla:
+
+```poetry run python3 src/performance_test/lz77_performance.py```
+
+Ensimmäisessä taulukossa on kompressointiin liittyvää statistiikkaa ja toisessa näytetään dekompressoinnin vastaavat mittaukset.
+
+Ensimmäisellä rivillä lukee kuinka monta funktiokutsua on tehty ja missä ajassa.
+
+Taulukon otsikot viittaavat seuraaviin asioihin:
+
+ncalls
+kutsujen määrä
+
+tottime
+koko aika käytetty tähän funktioon, poislukien alifunktioiden kutsuissa mennyt aika
+
+percall
+tottime ja ncalls jakolaskun osamäärä
+
+cumtime
+kumulatiivinen aika käytetty kyseiseen funktioon ja sen alifunktioihin
+
+percall
+cumtimen ja primitiivisten kutsujen (ei rekursiiviset kutsut) osamäärä
+
+filename:lineno(function)
+funktion tiedot
+
+lähde: https://docs.python.org/3/library/profile.html

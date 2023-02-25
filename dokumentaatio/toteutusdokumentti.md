@@ -2,10 +2,9 @@
 
 ## Huffmanin algoritmi
 
-Huffmanin tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston ja pakkaa ja purkaa sen. Toistaiseksi ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.
-Tähän tulee mahdollisesti muutoksia.
+Huffmanin tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.
 
-Yleisesti tässä toteutuksessa algoritmin kompressointiosa toimii niin, että se:
+Tässä toteutuksessa algoritmin kompressointiosa toimii niin, että se:
 1. Luo frekvenssitaulun tiedoston merkeille eli laskee kuinka monesti merkki ilmenee tiedostossa
 2. Luo minimipinon, eli pienimmän frekvenssin merkki on pinossa päällimäisenä. Merkeistä frekvensseineen luodaan solmuja.
 3. Luo huffmanin puun:
@@ -25,17 +24,25 @@ Yleisesti tässä toteutuksessa algoritmin kompressointiosa toimii niin, että s
 
 ## LZ77-algoritmi
 
-LZ77-tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston ja pakkaa sen. Ohjelmaan lisätään lähiviikkoina myös dekompressointiominaisuus. 
+LZ77-tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa.
 
 Ohjelman toteuttama kompressointi yksinkertaistettuna:
 1. Tekstitiedoston sisältö tallennetaan merkkijonona.
-2. Merkkijonoa aletaan käydä läpi kahden erilaisen "ikkunan avulla". Nämä ovat suurempi etsintäikkuna ja pienempi edessäkulkevaikkuna.
+2. Merkkijonoa aletaan käydä läpi kahden erilaisen "ikkunan avulla". Nämä ovat suurempi etsintäikkuna ja pienempi edessäkulkeva ikkuna.
 3. Edessäkulkeva ikkuna tarkastaa, onko etsintäikkunassa tismalleen samaa merkkiä (jos edessäkulkevassa on vain yksi merkki) tai samaa osamerkkijonoa (jos siinä on useampi merkki).
 4. Jos "match" löytyy, niin silloin tupleen tallennetaan tieto siitä, mistä indeksistä match alkaa ja kuinka pitkä matchin pituus on.
 5. Jos matchia ei löydy, niin silloin tupleen tallennetaan se merkki, jolle matchia ei löytynyt.
 6. Tuplet tallennetaan listaan.
+
+Yhteenvetoa tähän astisesta ja loppuosa:
 7. Alkuperäisen tiedoston merkkijonoa aletaan siis käymään merkkijono kerrallaan läpi, ja jos merkille ei löytynyt ikkuinoista matchia, listaan tallenetaan tieto merkistä.
 8. Jos match löytyy, tarkastetaan vielä seuraavatkin merkit "mätsäävätkö" ne ja kaikista pisin mätsäävä pätkä tallennetaan tupleen kohdassa 4 mainitulla tavalla. 
 9. Tuplelistan tiedot muutetaan biteiksi ja edelleen tavuiksi, jotka tallennetaan .bin-tiedostoon. Tämä on ohjelman tuottama kompressoitu tiedosto.
+
+Dekompressointi:
+1. Binäärimuodossa oleva tiedosto muutetaan bittimerkkijonoksi.
+2. Tämä merkkijono muutetaan takaisin tuplelistaksi.
+3. Tuplelistan tietoja käytetään hyödyksi alkuperäisen tekstin uudelleen kirjoittamisessa. Tuplet käydään läpi listan järjestyksessä. Jos tuplessa on merkki se kirjoitetaan ylös alussa tyhjänä olevaan merkkijonoon. Jos tuplessa ei ole merkkiä, silloin siinä olevien tietojen avulla (kuinka kaukana ensimmäinen merkki on ja merkkijonon pituus) merkkijono haetaan jo kirjoitetusta merkkijonosta. Tähän jo kirjoitettuun merkkijonoon lisätään haettu osamerkkijono.
+4. Merkkijono kirjoitetaan .txt-tiedostoon.
 
 
