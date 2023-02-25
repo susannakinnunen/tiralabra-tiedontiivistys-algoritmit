@@ -17,6 +17,7 @@ Kuvat testauksen kattavuusraportista 4.-, 12.-, ja 19.2.:
 
 ![Testikattavuusraportti-kuva 19.2.](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/Coveragereport%20from%202023-02-19%2020-54-05.png)
 
+![Testikattavuusraportti-kuva 25.2.](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/Coverage%20report%202023-02-25%2017-26-06.png)
 
 
 ### Mitä on testattu, miten tämä tehtiin?
