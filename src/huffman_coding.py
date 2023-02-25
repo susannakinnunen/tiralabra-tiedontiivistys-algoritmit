@@ -129,11 +129,12 @@ class HuffmanCoding:#pylint:disable=too-few-public-methods
         """Makes the encoded string divisible by 8,
         so that it can be later converted into bytes"""
         filling_length = 8 - len(encoded_string) % 8
-        # checks if the encoded string is divisible by 8
-        for element in range(filling_length): #pylint:disable=unused-variable
-            # 0's equal to the amount of filling_length
-            # is added to the end of the encoded_string.
-            encoded_string += "0"
+        # checks if the encoded string is divisible by 8 and
+        # calculates the amount that will be added to make it
+        # divisible by 8
+        encoded_string += filling_length*"0"
+        # 0's equal to the amount of filling_length
+        # are added to the end of the encoded_string.
 
         filling_information_binary = "{0:08b}".format(filling_length) #pylint:disable=consider-using-f-string
         #filling is formatted into 8-bits long binary form
