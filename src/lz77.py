@@ -131,9 +131,10 @@ class LZ77:
                 # character had a match and
                 # the following bit string starts with "1",
                 # to distinguish from a non-match.
-                bit_string = bit_string + "1" + str(bin(distance))[2:].zfill(12) + str(bin(length))[2:].zfill(4) + str(bin(character))[2:].zfill(7)#pylint:disable=line-too-long
-                # didn't know how to divide those operations to separate rows,
-                # that's why pylint-disable used
+                bit_string = bit_string + "1" \
+                + str(bin(distance))[2:].zfill(12) \
+                + str(bin(length))[2:].zfill(4) \
+                + str(bin(character))[2:].zfill(7)
 
         return bit_string
 

@@ -1,5 +1,5 @@
-"""This class compresses and decompresses a text
-    file with an algorithm based on Huffman Coding algorithm"""
+"""This module contains a HuffmanCoding class,
+which uses Huffman algorithm to compress and decompress textfiles"""
 import os
 import heapq # provides priority queue algorithms
 from node import Node
