@@ -9,9 +9,9 @@ Sekä Huffman- että LZ77 -algoritmeja on testattu yksikkö- ja suorituskykytest
 Yksikkötestauksen kattavuusraportti on löydettävissä täältä:
 [![codecov](https://codecov.io/gh/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/branch/main/graph/badge.svg?token=KEMF99W3XG)](https://codecov.io/gh/susannakinnunen/tiralabra-tiedontiivistys-algoritmit)
 
-Kuva testauksen kattavuusraportista 25.2.:
+Kuva testauksen kattavuusraportista 2.3.:
 
-![Testikattavuusraportti-kuva 25.2.](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/Coverage%20report%202023-02-25%2017-26-06.png)
+![Testikattavuusraportti-kuva 2.3.](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/Coverage%20report%202023-03-02.png)
 
 
 ### Mitä on testattu, miten tämä tehtiin?
@@ -67,15 +67,15 @@ Taulukon sarakkeiden nimet viittaavat seuraaviin asioihin:
 
 lähde: https://docs.python.org/3/library/profile.html
 
-### Suorituskykytestaus tulokset 25.2.
+### Suorituskykytestaus tulokset
 
 **Huffman kompressointi**
 
-![Huffman kompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/huffman%20compress%202023-02-25%2014-25-11.png)
+![Huffman kompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/vol%202%20huffman%20compress%202023-03-02%2015-23-40.png)
 
 **Huffman dekompressointi**
 
-![Huffman dekompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/huffman%20decompress%202023-02-25%2014-31-02.png)
+![Huffman dekompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/vol%202%20huffman%20decompress%202023-03-02%2015-26-12.png)
 
 **LZ77 kompressointi**
 
