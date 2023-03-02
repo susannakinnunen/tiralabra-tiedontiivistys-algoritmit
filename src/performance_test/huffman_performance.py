@@ -2,6 +2,7 @@ import cProfile
 
 """Performance testing for huffman algorithm with Python cProfile library
 """
+
 import os
 import heapq # provides priority queue algorithms
 
@@ -13,7 +14,7 @@ class HuffmanCoding:#pylint:disable=too-few-public-methods
         self.reversed_charcter_codes = {} # Key:binarycode, value:character
         self.frequence_table = {}
         self.string = self.get_string_from_file(path)
-        self.heap = []
+        self.heap = [] # first serves as a minimum heap;later as a huffmantree
         if test_small_files is None:
             self.compress()
             self.decompress()
@@ -23,6 +24,14 @@ class HuffmanCoding:#pylint:disable=too-few-public-methods
         for file compression."""
         self.create_frequence_table()
         self.create_minimum_heap()
+        if len(self.heap) == 1: 
+            # if the heap has only one node, 
+            # it means the huffman tree is basically done
+            # so create_huffman_tree -function can be skipped
+            self.create_code_single_character_string()
+            encoded_string = self.create_encoded_string()
+            compressed_file = self.create_compressed_file(encoded_string)
+            return compressed_file
         self.create_huffman_tree()
         self.create_codes()
         encoded_string = self.create_encoded_string()
@@ -65,7 +74,7 @@ class HuffmanCoding:#pylint:disable=too-few-public-methods
     def create_merged_node(self):
         """Takes two nodes with minimum frequency values from
         the minimum heap and merges them creating a merged node.
-        The merged node becomes the parent of the two taken nodes"""
+        The new merged node becomes the parent of the two old nodes"""
         smallest_node = heapq.heappop(self.heap)
         second_smallest_node = heapq.heappop(self.heap)
 
@@ -77,7 +86,14 @@ class HuffmanCoding:#pylint:disable=too-few-public-methods
         merged_node.right = second_smallest_node
 
         return merged_node
-
+    
+    def create_code_single_character_string(self):
+        """Assigns 0 as a code for the single character of the string."""
+        node = heapq.heappop(self.heap)
+        code = "0"
+        self.character_codes[node.character] = code
+        self.reversed_charcter_codes[code] = node.character
+        return self.character_codes
 
     def create_codes(self):
         """Initiates variables for the encoding of
@@ -88,14 +104,14 @@ class HuffmanCoding:#pylint:disable=too-few-public-methods
         code = ""
 
         self.encode(root_node, code)
-
         return self.character_codes
 
     def encode(self, node, code):
         """Assigns codes, 0's and 1's, to the nodes in the Huffman tree.
         Recursive function."""
-        if node is None:
+        if node == None:
             return
+
         if node.character is not None:
             self.character_codes[node.character] = code
             self.reversed_charcter_codes[code] = node.character
@@ -214,7 +230,7 @@ class HuffmanCoding:#pylint:disable=too-few-public-methods
             decompressed_file.write(decoded_string)
 
         return decompressed_file
-    
+
 
 class Node:
     """Nodes for the minimum heap
