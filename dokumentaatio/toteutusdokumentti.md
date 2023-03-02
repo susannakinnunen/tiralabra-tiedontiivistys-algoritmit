@@ -1,4 +1,4 @@
-# Toteutusdokumentti (keskeneräinen)
+# Toteutusdokumentti
 
 ## Huffmanin algoritmi
 
