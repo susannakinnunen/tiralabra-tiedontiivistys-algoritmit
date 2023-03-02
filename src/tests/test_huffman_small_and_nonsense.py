@@ -7,7 +7,8 @@ from tests.create_test_file import FileForTesting
 with open(os.path.join(os.getcwd(), "test_small.txt"), "w") as test_file:
     test_file.write("AAABBC") # Creates a very small test file
 
-
+with open(os.path.join(os.getcwd(), "test_same_character.txt"), "w") as test_file:
+    test_file.write("???????") # Creates a test file with only one character
 
 class TestHuffmanCodingSmallFiles(unittest.TestCase):
     def setUp(self):
@@ -107,3 +108,11 @@ class TestHuffmanCodingSmallFiles(unittest.TestCase):
 
         self.assertEqual(string, "AAABBC")
 
+    def test_single_character_file(self):
+        huffman = HuffmanCoding(os.path.join(os.getcwd(), "test_same_character.txt"))
+
+        with open("test_same_character.txt", "r", encoding="utf-8")as original_file, open("huffman_decompressed.txt", "r", encoding="utf-8")as decompressed_file:
+            original_string = original_file.read()
+            decompressed_string = decompressed_file.read()
+
+        assert original_string == decompressed_string
