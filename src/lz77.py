@@ -57,7 +57,7 @@ class LZ77:
         the characters in the lookahead_window.
         Returns a tuple = (d, l, c).
         d = The distance to the start of the match,
-        l = the lenght of the match,
+        l = the length of the match,
         c = the next character in the lookahead table that was not
         matched in the search windows."""
         match = (0,0,0)
