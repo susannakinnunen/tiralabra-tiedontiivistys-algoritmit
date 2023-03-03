@@ -58,21 +58,21 @@ Tässä osiossa vertailllaan Huffmanin ja LZ77 algoritmien aika- ja tilavaativuu
 
 Huffmanin algoritmi:
 - pakkaaminen
-  - aika: 0.481 sekuntia
+  - aika keskimäärin: 0.5 sekuntia
   - pakatun tiedoston koko: 285.7 kB eli 57 % alkuperäisestä tiedostokoosta
  - purkaminen
-  - aika: 1.347 sekuntia
+    - aika keskimäärin: 1.3 sekuntia
  
  LZ77-algoritmi:
  - pakkaaminen
-  - aika: 47.519 sekuntia
-  - pakatun tiedoston koko: 347.5 kB eli n. 70% alkuperäisestä tiedostokoosta
+    - aika: 47.519 sekuntia
+    - pakatun tiedoston koko: 347.5 kB eli n. 70% alkuperäisestä tiedostokoosta
  - purkaminen
-  - aika: 0.596 sekuntia
+    - aika: 0.596 sekuntia
 
 LZ77-algortimi siis pakkaa huomattavasti hitaammin ja pakattu tiedosto on suurempi kuin Huffmanin algoritmilla pakattu.
 
-Alla olevasta kuvasta näemme, että LZ77-algoritmin funktio convert_into_bit_string vie yli 45 sekuntia aikaa. Tässä funktiossa lista tupleja, joista löytyy tiedoston merkit ja niiden "matchit". Jokainen lista muutetaan kahdeksalla jaollisiin bittijonoihin. 
+Alla olevasta kuvasta näemme, että LZ77-algoritmin funktio convert_into_bit_string vie yli 45 sekuntia aikaa. Tässä funktiossa käsitellään listaa, jossa on tupleja, joista löytyy alkuperäisen tekstitiedoston merkit ja niiden "matchit". Jokainen tuple muutetaan kahdeksalla jaollisiin bittijonoihin.
 
 Tiedostosta tulee myös kovin suuri, sillä jokaiselle merkille varataan 15 bittiä, jotta suurin osa Extented ASCII-tauluun merkityistä merkeistä voidaan muuttaa bittijonoksi. Perinteisen ASCII-taulun merkeille tarvitsisi varata vain 8 bittiä, jolloin tiedoston kokoa saisi pienennettyä. 
 (lähde: https://www.asciitable.com/#google_vignette)
@@ -118,7 +118,14 @@ Taulukon sarakkeiden nimet viittaavat seuraaviin asioihin:
 
 lähde: https://docs.python.org/3/library/profile.html
 
+### Puutteet
+LZ77-algoritmiin perustuva ohjelma on hyvin hidas, ja se ei käännä kaikkia utf-8 -enkoodattuja merkkejä. Tämä johtuu siitä, että kun merkki käännetään bittjonoksi, niin se saa vain 15 bittiä käytettäväkseen. 
+
+Kuten suorituskykytestauksesta huomataan, bittijonoiksi kääntäminen vie suurimman osan ajasta. Tämä on hieman yllättävää, sillä voisi ajatella, että pisimmän saman merkkijonon etsiminen veisi eniten aikaa. 
+
+LZ77-ohjelman pakkaama tiedoston kokoa voisi myös yrittää saada pienemmäksi.
+
 
 ### Lähteet:
 https://www.programiz.com/dsa/huffman-coding
-
+https://docs.python.org/3/library/profile.html
