@@ -9,6 +9,7 @@ class UI:
 
 
 if __name__ == "__main__":
+    print("\n")
     print("Tämä on Huffmanin algoritmiin perustuva tiedonpakkausohjelma.")
     text_file_path = input("Anna tekstitiedoston polku:")
     ui = UI(text_file_path)
@@ -17,4 +18,4 @@ if __name__ == "__main__":
     decompressed_file_path = os.path.join(
             os.getcwd(), "huffman_decompressed.txt")
     print("\n")
-    print(f"Kompressoitu tiedosto löytyy polusta {compressed_file_path} ja dekompressoitu polusta {decompressed_file_path}.")
+    print(f"-Kompressoitu tiedosto löytyy polusta {compressed_file_path} \n\n-Dekompressoitu tiedsoto polusta {decompressed_file_path}")

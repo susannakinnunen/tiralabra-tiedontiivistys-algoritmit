@@ -19,4 +19,4 @@ if __name__ == "__main__":
             os.getcwd(), "lz77_compressed.bin")
     decompressed_file_path = os.path.join(os.getcwd(), "lz77_decompressed.txt")
     print("\n")
-    print(f"Kompressoitu tiedosto löytyy polusta {compressed_file_path} ja dekompressoitu polusta {decompressed_file_path}")
+    print(f"-Kompressoitu tiedosto löytyy polusta {compressed_file_path} \n\n-Dekompressoitu tiedosto polusta {decompressed_file_path}")
