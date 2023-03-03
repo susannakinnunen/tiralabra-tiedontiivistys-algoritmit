@@ -4,7 +4,7 @@
 
 ### Huffmanin algoritmi
 
-***Huffmanin tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.***
+***Huffmanin häviöttömään tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.***
 
 ***Algoritmiin kuuluu oleellisesti minimipino ja Huffmanin puu -tietorakenteet.***
 
@@ -28,7 +28,7 @@ Tässä toteutuksessa algoritmin kompressointiosa toimii niin, että se:
 
 ### LZ77-algoritmi
 
-***LZ77-tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.***
+***Häviöttömään LZ77-tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.***
 
 ***Ohjelma käy läpi tekstitiedostoa kahden ikkunan avulla yhtäaikaa. Ikkunat on nimetty etsintäikkunaksi (search window) ja edelläkulkevaksi ikkunaksi (lookahead window). Edelläkulkeva ikkuna on siis tekstissä pidemmällä kuin etsinäikkuna.***
 
