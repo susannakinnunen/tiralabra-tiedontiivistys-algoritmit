@@ -30,7 +30,7 @@ Tässä toteutuksessa algoritmin kompressointiosa toimii niin, että se:
 
 ***Häviöttömään LZ77-tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.***
 
-***Ohjelma käy läpi tekstitiedostoa kahden ikkunan avulla yhtäaikaa. Ikkunat on nimetty etsintäikkunaksi (search window) ja edelläkulkevaksi ikkunaksi (lookahead window). Edelläkulkeva ikkuna on siis tekstissä pidemmällä kuin etsinäikkuna.***
+***Ohjelma käy läpi tekstitiedoston sisältöä kahden ikkunan avulla yhtäaikaa. Ikkunat on nimetty etsintäikkunaksi (search window) ja edelläkulkevaksi ikkunaksi (lookahead window). Edelläkulkeva ikkuna on siis tekstissä pidemmällä kuin etsitnäikkuna.***
 
 Ohjelman toteuttama kompressointi:
 1. Tekstitiedoston sisältö tallennetaan merkkijonona.
@@ -41,7 +41,7 @@ Ohjelman toteuttama kompressointi:
 6. Tuplet tallennetaan listaan.
 
 Yhteenvetoa tähän astisesta ja loppuosa:
-7. Alkuperäisen tiedoston merkkijonoa aletaan siis käymään merkkijono kerrallaan läpi, ja jos merkille ei löytynyt ikkuinoista matchia, listaan tallenetaan tieto merkistä.
+7. Alkuperäisen tiedoston merkkijonoa aletaan käydä merkkijono kerrallaan läpi, ja jos merkille ei löytynyt ikkuinoista matchia, listaan tallenetaan tieto merkistä.
 8. Jos match löytyy, tarkastetaan vielä seuraavatkin merkit "mätsäävätkö" ne ja kaikista pisin mätsäävä pätkä tallennetaan tupleen kohdassa 4 mainitulla tavalla. 
 9. Tuplelistan tiedot muutetaan biteiksi ja edelleen tavuiksi, jotka tallennetaan .bin-tiedostoon. Tämä on ohjelman tuottama kompressoitu tiedosto.
 
