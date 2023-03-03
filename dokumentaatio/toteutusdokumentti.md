@@ -9,7 +9,7 @@
 ***Algoritmiin kuuluu oleellisesti minimipino ja Huffmanin puu -tietorakenteet.***
 
 Tässä toteutuksessa algoritmin kompressointiosa toimii niin, että se:
-1. Luo frekvenssitaulun tiedoston merkeille eli laskee kuinka monesti merkki ilmenee tiedostossa
+1. Luo frekvenssitaulun tiedoston merkeille, eli se laskee kunkin merkin lukumäärän.
 2. Luo minimipinon, eli pienimmän frekvenssin merkki on pinossa päällimäisenä. Merkeistä frekvensseineen luodaan solmuja.
 3. Luo huffmanin puun:
   - minimipinon kaksi pienintä solmua "mergetään" yhdeksi solmuksi laskemalla niiden frekvenssit yhteen niin kauan, että minimipinossa on enää yksi solmu jäljellä. Kahdesta mergetystä tulee aina uuden solmun lapsia.
