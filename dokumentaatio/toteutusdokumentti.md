@@ -1,14 +1,18 @@
 # Toteutusdokumentti
 
-## Huffmanin algoritmi
+## Yleisrakenne
 
-Huffmanin tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.
+### Huffmanin algoritmi
+
+***Huffmanin tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.***
+
+***Algoritmiin kuuluu oleellisesti minimipino ja Huffmanin puu -tietorakenteet.***
 
 Tässä toteutuksessa algoritmin kompressointiosa toimii niin, että se:
 1. Luo frekvenssitaulun tiedoston merkeille eli laskee kuinka monesti merkki ilmenee tiedostossa
 2. Luo minimipinon, eli pienimmän frekvenssin merkki on pinossa päällimäisenä. Merkeistä frekvensseineen luodaan solmuja.
 3. Luo huffmanin puun:
-  - minimipinon pienimmät solmut "mergetään" yhdeksi solmuksi laskemalla niiden frekvenssit yhteen niin kauan, että minimipinossa on enää yksi solmu jäljellä. Kahdesta mergetystä tulee aina mergetyn solmun lapsia.
+  - minimipinon kaksi pienintä solmua "mergetään" yhdeksi solmuksi laskemalla niiden frekvenssit yhteen niin kauan, että minimipinossa on enää yksi solmu jäljellä. Kahdesta mergetystä tulee aina uuden solmun lapsia.
 4. Puussa oleville solmuille annetaan binäärimuotoiset koodit (merkkeinä nollia ja ykkösiä). Kunkin merkin koodit tallennetaan python-sanakirjaan.
 5. Alkuperäinen teksti kirjoitetaan koodeilla ja siihen lisätään ylimääräisiä bittejä, jotta se olisi kahdeksalla jaollinen.
 6. Kahdeksalla jaollinen koodattu merkkijono muutetaan tavuiksi.
@@ -22,14 +26,16 @@ Tässä toteutuksessa algoritmin kompressointiosa toimii niin, että se:
 
 
 
-## LZ77-algoritmi
+### LZ77-algoritmi
 
-LZ77-tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa.
+***LZ77-tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.***
 
-Ohjelman toteuttama kompressointi yksinkertaistettuna:
+***Ohjelma käy läpi tekstitiedostoa kahden ikkunan avulla yhtäaikaa. Ikkunat on nimetty etsintäikkunaksi (search window) ja edelläkulkevaksi ikkunaksi (lookahead window). Edelläkulkeva ikkuna on siis tekstissä pidemmällä kuin etsinäikkuna.***
+
+Ohjelman toteuttama kompressointi:
 1. Tekstitiedoston sisältö tallennetaan merkkijonona.
 2. Merkkijonoa aletaan käydä läpi kahden erilaisen "ikkunan avulla". Nämä ovat suurempi etsintäikkuna ja pienempi edessäkulkeva ikkuna.
-3. Edessäkulkeva ikkuna tarkastaa, onko etsintäikkunassa tismalleen samaa merkkiä (jos edessäkulkevassa on vain yksi merkki) tai samaa osamerkkijonoa (jos siinä on useampi merkki).
+3. Ohjelma tarkistaa, löytyykö etsintäikkunasta edelläkulkevassa ikkunassa näkyvää merkkijonoa. 
 4. Jos "match" löytyy, niin silloin tupleen tallennetaan tieto siitä, mistä indeksistä match alkaa ja kuinka pitkä matchin pituus on.
 5. Jos matchia ei löydy, niin silloin tupleen tallennetaan se merkki, jolle matchia ei löytynyt.
 6. Tuplet tallennetaan listaan.
@@ -42,7 +48,77 @@ Yhteenvetoa tähän astisesta ja loppuosa:
 Dekompressointi:
 1. Binäärimuodossa oleva tiedosto muutetaan bittimerkkijonoksi.
 2. Tämä merkkijono muutetaan takaisin tuplelistaksi.
-3. Tuplelistan tietoja käytetään hyödyksi alkuperäisen tekstin uudelleen kirjoittamisessa. Tuplet käydään läpi listan järjestyksessä. Jos tuplessa on merkki se kirjoitetaan ylös alussa tyhjänä olevaan merkkijonoon. Jos tuplessa ei ole merkkiä, silloin siinä olevien tietojen avulla (kuinka kaukana ensimmäinen merkki on ja merkkijonon pituus) merkkijono haetaan jo kirjoitetusta merkkijonosta. Tähän jo kirjoitettuun merkkijonoon lisätään haettu osamerkkijono.
+3. Tuplelistan tietoja käytetään hyödyksi alkuperäisen tekstin uudelleen kirjoittamisessa. Tuplet käydään läpi listan järjestyksessä. Jos tuplessa on merkki se kirjoitetaan ylös alussa tyhjänä olevaan merkkijonoon. Tästä merkkijonosta muodostuu alkuperäisen tiedoston sisältö. Jos tuplessa ei ole merkkiä, se tarkoittaa, että siinä on tiedot "matchista" eli merkkijono löytyy jo kirjoitetusta tekstistä. Tässä tuplessa olevien tietojen avulla (kuinka kaukana ensimmäinen merkki on ja merkkijonon pituus) kyseinen merkkijono haetaan jo kirjoitetusta tekstistä. Tähän jo kirjoitettuun merkkijonoon lisätään haettu osamerkkijono.
 4. Merkkijono kirjoitetaan .txt-tiedostoon.
 
+
+### Saavutetut aika- ja tilavaativuudet
+
+Tässä osiossa vertailllaan Huffmanin ja LZ77 algoritmien aika- ja tilavaativuuksia 497.6 kilobitin kokoisen tiedoston pakkaamisessa ja purkamisessa.
+
+Huffmanin algoritmi:
+- pakkaaminen
+  - aika: 0.481 sekuntia
+  - pakatun tiedoston koko: 285.7 kB eli 57 % alkuperäisestä tiedostokoosta
+ - purkaminen
+  - aika: 1.347 sekuntia
+ 
+ LZ77-algoritmi:
+ - pakkaaminen
+  - aika: 47.519 sekuntia
+  - pakatun tiedoston koko: 347.5 kB eli n. 70% alkuperäisestä tiedostokoosta
+ - purkaminen
+  - aika: 0.596 sekuntia
+
+LZ77-algortimi siis pakkaa huomattavasti hitaammin ja pakattu tiedosto on suurempi kuin Huffmanin algoritmilla pakattu.
+
+Alla olevasta kuvasta näemme, että LZ77-algoritmin funktio convert_into_bit_string vie yli 45 sekuntia aikaa. Tässä funktiossa lista tupleja, joista löytyy tiedoston merkit ja niiden "matchit". Jokainen lista muutetaan kahdeksalla jaollisiin bittijonoihin. 
+
+Tiedostosta tulee myös kovin suuri, sillä jokaiselle merkille varataan 15 bittiä, jotta suurin osa Extented ASCII-tauluun merkityistä merkeistä voidaan muuttaa bittijonoksi. Perinteisen ASCII-taulun merkeille tarvitsisi varata vain 8 bittiä, jolloin tiedoston kokoa saisi pienennettyä. 
+(lähde: https://www.asciitable.com/#google_vignette)
+
+#### Kuvat suorituskyky testauksesta
+
+**Huffman kompressointi**
+
+![Huffman kompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/vol%202%20huffman%20compress%202023-03-02%2015-23-40.png)
+
+**Huffman dekompressointi**
+
+![Huffman dekompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/vol%202%20huffman%20decompress%202023-03-02%2015-26-12.png)
+
+**LZ77 kompressointi**
+
+![LZ77 kompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/lz77%20compression%202023-02-25%2014-27-47.png)
+
+**LZ77 dekompressointi**
+
+![LZ77 dekompressio suorituskyky kuva](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/kuvat/lz77%202023-02-25%2014-33-11.png)
+
+
+Taulukon sarakkeiden nimet viittaavat seuraaviin asioihin:
+
+**ncalls**
+- kutsujen määrä
+
+**tottime**
+- koko aika käytetty tähän funktioon, poislukien alifunktioiden kutsuissa mennyt aika
+
+**percall**
+- tottime ja ncalls jakolaskun osamäärä
+
+**cumtime**
+- kumulatiivinen aika käytetty kyseiseen funktioon ja sen alifunktioihin
+
+**percall**
+- cumtimen ja primitiivisten kutsujen (ei rekursiiviset kutsut) osamäärä
+
+**filename:lineno(function)**
+- funktion tiedot
+
+lähde: https://docs.python.org/3/library/profile.html
+
+
+### Lähteet:
+https://www.programiz.com/dsa/huffman-coding
 
