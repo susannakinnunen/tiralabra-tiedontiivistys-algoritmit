@@ -30,7 +30,7 @@ Tässä toteutuksessa algoritmin kompressointiosa toimii niin, että se:
 
 ***Häviöttömään LZ77-tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.***
 
-***Ohjelma käy läpi tekstitiedoston sisältöä kahden ikkunan avulla yhtäaikaa. Ikkunat on nimetty etsintäikkunaksi (search window) ja edelläkulkevaksi ikkunaksi (lookahead window). Edelläkulkeva ikkuna on siis tekstissä pidemmällä kuin etsitnäikkuna.***
+***Ohjelma käy läpi tekstitiedoston sisältöä kahden ikkunan avulla yhtäaikaa. Ikkunat on nimetty etsintäikkunaksi (search window) ja edelläkulkevaksi ikkunaksi (lookahead window). Kompressoituun tiedstoon on tallennettuna (distance, length, character)-tupleja. Tupleissa on joko character, eli merkki tai siinä annetaan "koordinaatit" merkin/merkkijonon sijaintiin tekstissä. Distance eli etäisyys neuvoo, kuinka kaukana merkki on ja length eli pituus kertoo merkkijonon pituuden.***
 
 Ohjelman toteuttama kompressointi:
 1. Tekstitiedoston sisältö tallennetaan merkkijonona.
@@ -54,7 +54,7 @@ Dekompressointi:
 
 ### Saavutetut aika- ja tilavaativuudet
 
-Tässä osiossa vertailllaan Huffmanin ja LZ77 algoritmien aika- ja tilavaativuuksia 497.6 kilobitin kokoisen tiedoston pakkaamisessa ja purkamisessa.
+Tässä osiossa vertailllaan Huffmanin ja LZ77 algoritmien aika- ja tilavaativuuksia 497.6 kilotavun kokoisen tiedoston pakkaamisessa ja purkamisessa.
 
 Huffmanin algoritmi:
 - pakkaaminen
