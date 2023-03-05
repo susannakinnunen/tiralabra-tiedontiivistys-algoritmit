@@ -9,7 +9,7 @@ class TestLZ77Coding(unittest.TestCase):
         self.lz77 = LZ77(self.path)
 
     def test_compress_is_smaller(self):
-        """Tests if the compressed file size is at least 60 % smaller than the original file size"""
+        """Tests if the compressed file size is at least 70 % smaller than the original file size"""
         original_file_size = os.path.getsize(os.path.join(os.getcwd(), "kalevala.txt"))
         compressed_file_size = os.path.getsize(os.path.join(os.getcwd(), "lz77_compressed.bin"))
 
