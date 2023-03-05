@@ -18,11 +18,11 @@ Kuva testauksen kattavuusraportista 2.3.:
 
 Projekti koostuu kokonaisuudessaan kahdesta eri algoritmista, jotka ovat Huffman- ja LZ77 -tiedontiivistysalgoritmit.
 
-Molempia algoritmeja on testattu yksikkötestein pytest-kirjaston avulla. Pytest-kirjastoa on käytetty myös end-to-end -testauksessa. End-to-end -testit tarkastavat onko alkuperäisen tekstitiedoston sisältö sama kuin dekompressoidun. Lisäksi kyseiset testit tarkastavat, onko Huffmanin algoritmilla kompressoitu tiedosto vähintään 40% pienempi kuin alkuperäinen ja LZ77-algoritmin kohdalla tarkistetaan onko kompressoitu tiedosto vähintään 30% pienempi.
+Molempia algoritmeja on testattu yksikkötestein pytest-kirjaston avulla. Pytest-kirjastoa on käytetty myös end-to-end -testauksessa. End-to-end -testit tarkastavat onko alkuperäisen tekstitiedoston sisältö sama kuin dekompressoidun. Lisäksi kyseiset testit vertaavat kompressoitujen tiedostojen kokoja alkuperäisten tiedostojen kokoihin. Huffmanin algoritmin kohdalla alkuperäinen tiedosto on n.500 kB, ja testissä tarkastetaan, että kompressoitu tiedosto vähintään 40% pienempi kuin alkuperäinen. Samalla alkuperäisellä tiedostolla tarkistetaan, että LZ77-algoritmilla kompressoitu tiedosto on vähintään 30% pienempi. LZ77-algoritimia testataan myös 2.9 MB kokoisella tiedostolla, jolloin siitä kompressoitu tiedosto on vähintään 40 % pienempi.
 
 ### Minkälaisilla syötteillä testaus tehtiin?
 
-Molempien algoritmien end-to-end -toiminnallisuutta sekä kompressoidun tiedoston pienemmyyttä on testattu englanninkielisellä Kalevalalla. Jo pelkästään näillä testeillä saadaan testattua kaikkia funktioita. Nämä testit löytyvät poluista src/tests/test_huffman_coding_kalevala.py ja src/tests/test_lz77_kalevala.py.
+Molempien algoritmien end-to-end -toiminnallisuutta sekä kompressoidun tiedoston pienemmyyttä on testattu englanninkielisellä Kalevalalla (tiedoston koko n. 500 kilotavua). Jo pelkästään näillä testeillä saadaan testattua kaikkia funktioita. Nämä testit löytyvät poluista src/tests/test_huffman_coding_kalevala.py ja src/tests/test_lz77_kalevala.py.
 
 Algoritmeja testataan myös isommalla (2.9 MB) itseluodulla "siansaksa"-tiedostolla ja hyvin pienillä merkkijonoilla tiedostossa src/tests/test_huffman_coding_small_and_nonsense.py sekä src/tests/test_lz77_small_and_nonsense.py . Näitä testejä on tehty saman aikaisesti ohjelmien kanssa. Näistä testeistä oli paljon hyötyä yksittäisten funktioiden toimivuuden ja toiminnallisuuksien selvittämisessä ohjelmaa tehdessä.
 
