@@ -5,6 +5,8 @@ import cProfile
 
 import os
 import heapq # provides priority queue algorithms
+import time
+from create_test_file import FileForTesting
 
 class HuffmanCoding:#pylint:disable=too-few-public-methods
     """This class compresses and decompresses a text
@@ -250,5 +252,21 @@ class Node:
 
 if __name__== "__main__":
     huffman  = HuffmanCoding("/home/suskinnu/Desktop/yliopisto/tiralabra/tiralabra-tiedontiivistys-algoritmit/kalevala.txt", True)
+    print("Tilastot 497.6 kilotavun tiedoston pakkaamisesta ja purkamisesta:")
     cProfile.run('huffman.compress()')
     cProfile.run('huffman.decompress()')
+
+    """Tests if the compressed file size is at least 60 % smaller than the original file size"""
+    start = time.time()
+    FileForTesting() # Creates a bit bigger test_file.txt
+    path_big_nonsense = os.path.join(os.getcwd(), "test_big_nonsense.txt")
+    huffman_big_nonsense = HuffmanCoding(path_big_nonsense)
+    original_size = os.path.getsize(os.path.join(os.getcwd(), "test_big_nonsense.txt"))
+    compressed_size = os.path.getsize(os.path.join(os.getcwd(), "lz77_compressed.bin"))
+    end = time.time()
+    if compressed_size/original_size <= 0.60:
+        print(f"Isosta tiedostosta (koko 2.9MB) kompressoitu tiedosto on {round(compressed_size/original_size*100)} % alkuperäisen tiedoston koosta.")
+        print(f"Kulunut aika:{end-start} sekuntia")
+    else:
+        print(f"2.9MB kokoisesta tiedostosta kompressoitu tiedosto on {round(compressed_size/original_size*100)} % alkuperäisen tiedoston koosta.")
+        print(f"Kulunut aika:{end-start} sekuntia")

@@ -4,6 +4,8 @@ import cProfile
 """
 
 import os
+from create_test_file import FileForTesting
+import time
 
 class LZ77:
     """
@@ -250,5 +252,21 @@ class LZ77:
 
 if __name__== "__main__":
     lz  = LZ77("/home/suskinnu/Desktop/yliopisto/tiralabra/tiralabra-tiedontiivistys-algoritmit/kalevala.txt", True)
+    print("Tilastot 497.6 kilotavun tiedoston pakkaamisesta ja purkamisesta:")
     cProfile.run('lz.compress()')
     cProfile.run('lz.decompress()')
+
+    """Tests if the compressed file size is at least 60 % smaller than the original file size"""
+    start = time.time()
+    FileForTesting() # Creates a bit bigger test_file.txt
+    path_big_nonsense = os.path.join(os.getcwd(), "test_big_nonsense.txt")
+    lz77_big_nonsense = LZ77(path_big_nonsense)
+    original_size = os.path.getsize(os.path.join(os.getcwd(), "test_big_nonsense.txt"))
+    compressed_size = os.path.getsize(os.path.join(os.getcwd(), "lz77_compressed.bin"))
+    end = time.time()
+    if compressed_size/original_size <= 0.60:
+        print(f"Isosta tiedostosta (koko 2.9MB) kompressoitu tiedosto on {round(compressed_size/original_size*100)} % alkuperäisen tiedoston koosta.")
+        print(f"Kulunut aika:{end-start} sekuntia")
+    else:
+        print(f"2.9MB kokoisesta tiedostosta kompressoitu tiedosto on {round(compressed_size/original_size*100)} % alkuperäisen tiedoston koosta.")
+        print(f"Kulunut aika:{end-start} sekuntia")
