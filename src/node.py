@@ -1,7 +1,7 @@
 """Node creating module"""
 
 class Node:
-    """Nodes for the minimum heap
+    """Nodes for the minimum heap and Huffman tree
     """
     def __init__(self, character, frequency):
         self.character = character
