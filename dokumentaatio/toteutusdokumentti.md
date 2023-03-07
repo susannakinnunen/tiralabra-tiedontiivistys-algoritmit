@@ -52,9 +52,10 @@ Dekompressointi:
 4. Merkkijono kirjoitetaan .txt-tiedostoon.
 
 
-### Saavutetut aika- ja tilavaativuudet
+### Saavutetut aikavaativuudet
 
-Tässä osiossa vertailllaan Huffmanin ja LZ77 algoritmien aika- ja tilavaativuuksia 497.6 kilotavun kokoisen tiedoston pakkaamisessa ja purkamisessa.
+Tässä osiossa vertailllaan Huffmanin ja LZ77 algoritmien suorituskykyä ja aikavaativuutta 497.6 kilotavun kokoisen tiedoston pakkaamisessa ja purkamisessa.
+Tämän lisäksi vertaillaan molempien algoritmien tuottamaa kompressoitua tiedostoa, kun kyseessä on 2.9 megatavun kokoinen tiedosto. Ohjeet näiden suorituskykytestien ajamiseen löytyvät testausdokumentista. 
 
 Huffmanin algoritmi:
 - pakkaaminen
@@ -74,10 +75,13 @@ LZ77-algortimi siis pakkaa huomattavasti hitaammin ja pakattu tiedosto on suurem
 
 Alla olevasta kuvasta näemme, että LZ77-algoritmin funktio convert_into_bit_string vie yli 45 sekuntia aikaa (kokonaisaika 47 sekuntia). Tässä funktiossa käsitellään listaa, jossa on tupleja, joista löytyy alkuperäisen tekstitiedoston merkit ja niiden "matchit". Jokainen tuple muutetaan kahdeksalla jaollisiin bittijonoihin.
 
-Tiedostosta tulee myös kovin suuri, sillä jokaiselle merkille varataan 15 bittiä, jotta suurin osa Extented ASCII-tauluun merkityistä merkeistä voidaan muuttaa bittijonoksi. Perinteisen ASCII-taulun merkeille tarvitsisi varata vain 8 bittiä, jolloin tiedoston kokoa saisi pienennettyä. 
-(lähde: https://www.asciitable.com/#google_vignette)
+Tiedostosta tulee myös kovin suuri, sillä jokaiselle merkille varataan 15 bittiä, jotta suurin osa Extented ASCII-tauluun merkityistä merkeistä voidaan muuttaa bittijonoksi. Perinteisen ASCII-taulun merkeille tarvitsisi varata vain 8 bittiä, jolloin tiedoston kokoa saisi pienennettyä. (lähde: https://www.asciitable.com/#google_vignette)
 
-#### Kuvat suorituskykytestauksesta
+#### 2.9 MB tiedoston pakkaaminen
+
+Kun kyseessä on on liki 3 megatavun tiedosto, molemmat algoritmit pakkaavat tiedoston yhtä pieniksi. Kompressoidun tiedosto on n. 54% alkuperäisen tiedoston koosta. Huffmanin algoritmi on kuitenkin ylivoimaisesti nopeampi. Siinä menee aikaa n. 5 sekuntia, kun taas LZ77-algoritmin kompressointi vie reilu 6 minuuttia.
+
+#### Kuvat suorituskykytestauksesta 497.6 kilotavun tiedosto
 
 **Huffman kompressointi**
 
