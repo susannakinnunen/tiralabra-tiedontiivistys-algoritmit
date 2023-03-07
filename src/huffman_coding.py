@@ -94,9 +94,8 @@ class HuffmanCoding:#pylint:disable=too-few-public-methods
         return self.character_codes
 
     def create_codes(self):
-        """Initiates variables for the encoding of
-        the huffman tree. Calls self.encode() function,
-        which startto call itself recursively.
+        """Initiates variables needed for the encoding of
+        huffman tree. Calls encode-function.
         Returns the self.character_codes-dictionary"""
         root_node = heapq.heappop(self.heap)
         code = ""
