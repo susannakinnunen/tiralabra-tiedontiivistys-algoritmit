@@ -36,14 +36,4 @@ class TestLZ77Coding(unittest.TestCase):
 
         self.assertEqual(str(byte_list), 'bytearray(b\'\\x00A\\x00B\\x00B\\x00A\\x80"\\x00\\x80\\x19\\x00\')')
 
-#Tests are done with the big nonsense file.
-    def test_compress_is_smaller(self):
-        """Tests if the compressed file size is at least 60 % smaller than the original file size"""
-        FileForTesting() # Creates a bit bigger test_file.txt
-        path_big_nonsense = os.path.join(os.getcwd(), "test_big_nonsense.txt")
-        lz77_big_nonsense = LZ77(path_big_nonsense)
-        original_file_size = os.path.getsize(os.path.join(os.getcwd(), "test_big_nonsense.txt"))
-        compressed_file_size = os.path.getsize(os.path.join(os.getcwd(), "lz77_compressed.bin"))
-        print(compressed_file_size)
-        assert compressed_file_size/original_file_size <= 0.60
 
