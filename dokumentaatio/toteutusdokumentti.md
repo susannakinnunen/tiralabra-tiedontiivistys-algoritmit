@@ -52,7 +52,7 @@ Dekompressointi:
 4. Merkkijono kirjoitetaan .txt-tiedostoon.
 
 
-### Saavutetut aikavaativuudet
+## Suorituskyvyn ja aikavaativuuden vertailu
 
 Tässä osiossa vertailllaan Huffmanin ja LZ77 algoritmien suorituskykyä ja aikavaativuutta 497.6 kilotavun kokoisen tiedoston pakkaamisessa ja purkamisessa.
 Tämän lisäksi vertaillaan molempien algoritmien tuottamaa kompressoitua tiedostoa, kun kyseessä on 2.9 megatavun kokoinen tiedosto. Ohjeet näiden suorituskykytestien ajamiseen löytyvät testausdokumentista. 
