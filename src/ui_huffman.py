@@ -21,6 +21,6 @@ if __name__ == "__main__":
     original_size = os.path.getsize(os.path.join(os.getcwd(), "kalevala.txt"))
     compressed_size = os.path.getsize(os.path.join(os.getcwd(), "huffman_compressed.bin"))
     print("\n")
-    print(f"-Kompressoitu tiedosto löytyy polusta {compressed_file_path} \n\n-Dekompressoitu tiedsoto polusta {decompressed_file_path}")
+    print(f"-Kompressoitu tiedosto löytyy polusta {compressed_file_path} \n\n-Dekompressoitu tiedosto polusta {decompressed_file_path}")
     print("\n")
     print(f"Kompressoidun tiedoston koko on {round(compressed_size/original_size*100)} % alkuperäisen tiedoston koosta.")
