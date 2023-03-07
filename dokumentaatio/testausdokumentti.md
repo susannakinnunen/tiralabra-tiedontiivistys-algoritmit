@@ -18,21 +18,24 @@ Kuva testauksen kattavuusraportista 2.3.:
 
 Projekti koostuu kokonaisuudessaan kahdesta eri algoritmista, jotka ovat Huffman- ja LZ77 -tiedontiivistysalgoritmit.
 
-Molempia algoritmeja on testattu yksikkötestein pytest-kirjaston avulla. Pytest-kirjastoa on käytetty myös end-to-end -testauksessa. End-to-end -testit tarkastavat onko alkuperäisen tekstitiedoston sisältö sama kuin dekompressoidun. Lisäksi kyseiset testit vertaavat kompressoitujen tiedostojen kokoja alkuperäisten tiedostojen kokoihin. Huffmanin algoritmin kohdalla alkuperäinen tiedosto on n.500 kB, ja testissä tarkastetaan, että kompressoitu tiedosto vähintään 40% pienempi kuin alkuperäinen. Samalla alkuperäisellä tiedostolla tarkistetaan, että LZ77-algoritmilla kompressoitu tiedosto on vähintään 30% pienempi. LZ77-algoritimia testataan myös 2.9 MB kokoisella tiedostolla, jolloin siitä kompressoitu tiedosto on vähintään 40 % pienempi.
+Molempia algoritmeja on testattu yksikkötestein pytest-kirjaston avulla. Pytest-kirjastoa on käytetty myös end-to-end -testauksessa. End-to-end -testit tarkastavat onko alkuperäisen tekstitiedoston sisältö sama kuin dekompressoidun. 
+% 
+
+Lisäksi algoritmien pakkaamien tiedostojen kokoja testataan ajamalla ohjelmat ja tarkistamalla, että niiden tuottamat pakatut tiedostot ovat niille annettujen ehtojen mukaiset (ehdot selitetty alhaalla tarkemmin).
 
 ### Minkälaisilla syötteillä testaus tehtiin?
 
 Molempien algoritmien end-to-end -toiminnallisuutta sekä kompressoidun tiedoston pienemmyyttä on testattu englanninkielisellä Kalevalalla (tiedoston koko n. 500 kilotavua). Jo pelkästään näillä testeillä saadaan testattua kaikkia funktioita. Nämä testit löytyvät poluista src/tests/test_huffman_coding_kalevala.py ja src/tests/test_lz77_kalevala.py.
 
-Algoritmeja testataan myös isommalla (2.9 MB) itseluodulla "siansaksa"-tiedostolla ja hyvin pienillä merkkijonoilla tiedostossa src/tests/test_huffman_coding_small_and_nonsense.py sekä src/tests/test_lz77_small_and_nonsense.py . Näitä testejä on tehty saman aikaisesti ohjelmien kanssa. Näistä testeistä oli paljon hyötyä yksittäisten funktioiden toimivuuden ja toiminnallisuuksien selvittämisessä ohjelmaa tehdessä.
+Algoritmeja testataan myös isommalla (2.9 MB) itseluodulla "siansaksa"-tiedostolla ja hyvin pienillä merkkijonoilla tiedostossa src/tests/test_huffman_coding_small_and_nonsense.py sekä src/tests/test_lz77_small_and_nonsense.py. Näitä syötteitä käytetään yksittäisten funktioiden testaamiseen. Kyseisiä testejä on tehty saman aikaisesti ohjelmien kanssa. Näistä testeistä oli paljon hyötyä yksittäisten funktioiden toimivuuden ja toiminnallisuuksien selvittämisessä ohjelmaa tehdessä.
+
+Noin 500 kilotavun kokoisen tiedoston kompressoinnissa tarkastetaan, että Huffmanin algoritmin pakkaama tiedosto on vähintään 40 % alkuperäistä pienempi ja LZ77 algoritmin pakkaama vähintään 30 % pienempi.
+
+Molempien algoritmien pakkaaaan tiedoston kokoa tarkastellaan myös 2,9 megatavun kokoisen tiedoston pakkaamisessa. Sen kohdalla molempien algoritmien pakkaman tiedoston tulee olla vähintään 40 % prosenttia pienempi.
 
 ### Miten testit voidaan toistaa?
-Testit voi toistaa komentorivillä menemällä ohjelman juurikansioon ja ajamalla koodin ```poetry run pytest src```.
+Yksikkötestit voi toistaa komentorivillä menemällä ohjelman juurikansioon ja ajamalla koodin ```poetry run pytest src```.
 
-
-## Suorituskykytestaus
-
-Suorituskykytestausta on tehty Pythonin cProfile kirjaston avulla. 
 Huffmanin algoritmiin liittyvät testit voi ajaa juurikansiossa komentoriviltä kommennolla:
 
 ```poetry run python3 src/performance_test/huffman_performance.py```
@@ -40,6 +43,12 @@ Huffmanin algoritmiin liittyvät testit voi ajaa juurikansiossa komentoriviltä 
 ja LZ77-algoritmin komennolla:
 
 ```poetry run python3 src/performance_test/lz77_performance.py```
+
+## Suorituskykytestaus
+
+***Tarkempi suorituskykyvertailu löytyy toteutusdokumentista***
+
+Suorituskykytestausta on tehty Pythonin cProfile kirjaston avulla. 
 
 Ensimmäisessä taulukossa on kompressointiin liittyvää statistiikkaa ja toisessa näytetään dekompressoinnin vastaavat mittaukset.
 
