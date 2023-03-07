@@ -51,11 +51,10 @@ Dekompressointi:
 3. Tuplelistan tietoja käytetään hyödyksi alkuperäisen tekstin uudelleen kirjoittamisessa. Tuplet käydään läpi listan järjestyksessä. Jos tuplessa on merkki se kirjoitetaan ylös alussa tyhjänä olevaan merkkijonoon. Tästä merkkijonosta muodostuu alkuperäisen tiedoston sisältö. Jos tuplessa ei ole merkkiä, se tarkoittaa, että siinä on tiedot "matchista" eli merkkijono löytyy jo kirjoitetusta tekstistä. Tässä tuplessa olevien tietojen avulla (kuinka kaukana ensimmäinen merkki on ja merkkijonon pituus) kyseinen merkkijono haetaan jo kirjoitetusta tekstistä. Tähän jo kirjoitettuun merkkijonoon lisätään haettu osamerkkijono.
 4. Merkkijono kirjoitetaan .txt-tiedostoon.
 
+## Suorituskyvyn vertailu
 
-## Suorituskyvyn ja aikavaativuuden vertailu
-
-Tässä osiossa vertailllaan Huffmanin ja LZ77 algoritmien suorituskykyä ja aikavaativuutta 497.6 kilotavun kokoisen tiedoston pakkaamisessa ja purkamisessa.
-Tämän lisäksi vertaillaan molempien algoritmien tuottamaa kompressoitua tiedostoa, kun kyseessä on 2.9 megatavun kokoinen tiedosto. Ohjeet näiden suorituskykytestien ajamiseen löytyvät testausdokumentista. 
+Tässä osiossa vertailllaan Huffmanin ja LZ77 algoritmien suorituskykyä 497.6 kilotavun kokoisen tiedoston pakkaamisessa ja purkamisessa.
+Tämän lisäksi vertaillaan molempien algoritmien tuottamaa kompressoitua tiedostoa, kun kompressoitavana on 2.9 megatavun kokoinen tiedosto. Ohjeet näiden suorituskykytestien ajamiseen löytyvät testausdokumentista. 
 
 Huffmanin algoritmi:
 - pakkaaminen
@@ -122,14 +121,20 @@ Taulukon sarakkeiden nimet viittaavat seuraaviin asioihin:
 
 lähde: https://docs.python.org/3/library/profile.html
 
-### Puutteet
-LZ77-algoritmiin perustuva ohjelma on hyvin hidas, ja se ei käännä kaikkia utf-8 -enkoodattuja merkkejä. Tämä johtuu siitä, että kun merkki käännetään bittjonoksi, niin se saa vain 15 bittiä käytettäväkseen. 
+## Puutteet
+LZ77-algoritmiin perustuva ohjelma on hyvin hidas, ja se ei käännä kaikkia utf-8-koodattuja merkkejä. Tämä johtuu siitä, että kun merkki käännetään bittjonoksi, niin se saa vain 15 bittiä käytettäväkseen. Utf-8-koddattu merkki voi olla pisimmillään neljän tavun pituinen. lähde: https://en.wikipedia.org/wiki/UTF-8
 
 Kuten suorituskykytestauksesta huomataan, bittijonoiksi kääntäminen vie suurimman osan ajasta. Tämä on hieman yllättävää, sillä voisi ajatella, että pisimmän saman merkkijonon etsiminen veisi eniten aikaa. 
 
-LZ77-ohjelman pakkaama tiedoston kokoa voisi myös yrittää saada pienemmäksi.
+LZ77-ohjelman pakkaaman tiedoston koko voisi olla pienempi testauksessa mukana olevan n. 500 kilotavun kohdalla.
 
+### Aikavaativuus
+Huffmanin algoritmin aikavaativuus on O(n log n), kun n on merkkien määrä. Lähde: https://en.wikipedia.org/wiki/Huffman_coding
+LZ77-algoritmin aikavaativuus on O(n), kun n on merkkien määrä. Lähde: https://ieeexplore.ieee.org/document/1096485
 
-### Lähteet:
+### Kaikki lähteet koottuna:
 https://www.programiz.com/dsa/huffman-coding
 https://docs.python.org/3/library/profile.html
+https://en.wikipedia.org/wiki/UTF-8
+https://en.wikipedia.org/wiki/Huffman_coding
+https://ieeexplore.ieee.org/document/1096485
