@@ -266,7 +266,7 @@ if __name__== "__main__":
     end = time.time()
     if compressed_size/original_size <= 0.60:
         print(f"Isosta tiedostosta (koko 2.9MB) kompressoitu tiedosto on {round(compressed_size/original_size*100)} % alkuperäisen tiedoston koosta.")
-        print(f"Kulunut aika:{end-start} sekuntia")
+        print(f"Kulunut aika: {round(end-start, 2)} sekuntia")
     else:
         print(f"2.9MB kokoisesta tiedostosta kompressoitu tiedosto on {round(compressed_size/original_size*100)} % alkuperäisen tiedoston koosta.")
-        print(f"Kulunut aika:{end-start} sekuntia")
+        print(f"Kulunut aika: {round(end-start, 2)} sekuntia")

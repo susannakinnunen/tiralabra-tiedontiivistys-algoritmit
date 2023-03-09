@@ -262,11 +262,11 @@ if __name__== "__main__":
     path_big_nonsense = os.path.join(os.getcwd(), "test_big_nonsense.txt")
     huffman_big_nonsense = HuffmanCoding(path_big_nonsense)
     original_size = os.path.getsize(os.path.join(os.getcwd(), "test_big_nonsense.txt"))
-    compressed_size = os.path.getsize(os.path.join(os.getcwd(), "lz77_compressed.bin"))
+    compressed_size = os.path.getsize(os.path.join(os.getcwd(), "huffman_compressed.bin"))
     end = time.time()
     if compressed_size/original_size <= 0.60:
         print(f"Isosta tiedostosta (koko 2.9MB) kompressoitu tiedosto on {round(compressed_size/original_size*100)} % alkuperäisen tiedoston koosta.")
-        print(f"Kulunut aika:{end-start} sekuntia")
+        print(f"Kulunut aika: {round(end-start, 2)} sekuntia")
     else:
         print(f"2.9MB kokoisesta tiedostosta kompressoitu tiedosto on {round(compressed_size/original_size*100)} % alkuperäisen tiedoston koosta.")
-        print(f"Kulunut aika:{end-start} sekuntia")
+        print(f"Kulunut aika: {round(end-start, 2)} sekuntia")
