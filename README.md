@@ -1,8 +1,8 @@
 # Tiralabra tiedontiivistys -algoritmit
 
 - [Määrittelydokumentti](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/m%C3%A4%C3%A4rittelydokumentti.md)
-- [Testausdokumentti](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/testausdokumentti.md)
 - [Toteutusdokumentti](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/toteutusdokumentti.md)
+- [Testausdokumentti](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/testausdokumentti.md)
 - [Käyttöohje](https://github.com/susannakinnunen/tiralabra-tiedontiivistys-algoritmit/blob/main/dokumentaatio/k%C3%A4ytt%C3%B6ohje.md)
 
 ## Viikkoraportit
