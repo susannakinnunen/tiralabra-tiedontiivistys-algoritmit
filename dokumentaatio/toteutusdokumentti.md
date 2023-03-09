@@ -30,7 +30,7 @@ Tässä toteutuksessa algoritmin kompressointiosa toimii niin, että se:
 
 ***Häviöttömään LZ77-tiedontiivistysalgoritmiin perustuva ohjelma ottaa .txt-muotoisen tiedoston, jonka se pakkaa ja purkaa. Ohjelma suorittaa sekä pakkaamisen että purkamisen yhdellä kerralla.***
 
-***Ohjelma käy läpi tekstitiedoston sisältöä kahden ikkunan avulla yhtäaikaa. Ikkunat on nimetty etsintäikkunaksi (search window) ja edelläkulkevaksi ikkunaksi (lookahead window). Kompressoituun tiedstoon on tallennettuna (distance, length, character)-tupleja. Tupleissa on joko character, eli merkki tai siinä annetaan "koordinaatit" merkin/merkkijonon sijaintiin tekstissä. Distance eli etäisyys neuvoo, kuinka kaukana merkki on ja length eli pituus kertoo merkkijonon pituuden.***
+***Ohjelma käy läpi tekstitiedoston sisältöä kahden ikkunan avulla yhtäaikaa. Ikkunat on nimetty etsintäikkunaksi (search window) ja edelläkulkevaksi ikkunaksi (lookahead window). Kompressoituun tiedostoon on tallennettuna (distance, length, character)-tupleja. Tupleissa on joko character, eli merkki tai siinä annetaan "koordinaatit" merkin/merkkijonon sijaintiin tekstissä. Distance eli etäisyys neuvoo, kuinka kaukana merkki on ja length eli pituus kertoo merkkijonon pituuden.***
 
 Ohjelman toteuttama kompressointi:
 1. Tekstitiedoston sisältö tallennetaan merkkijonona.
@@ -78,7 +78,7 @@ Tiedostosta tulee myös kovin suuri, sillä jokaiselle merkille varataan 15 bitt
 
 #### 2.9 MB tiedoston pakkaaminen
 
-Kun kyseessä on on liki 3 megatavun tiedosto, molemmat algoritmit pakkaavat tiedoston yhtä pieniksi. Kompressoidun tiedosto on n. 54% alkuperäisen tiedoston koosta. Huffmanin algoritmi on kuitenkin ylivoimaisesti nopeampi. Siinä menee aikaa n. 5 sekuntia, kun taas LZ77-algoritmin kompressointi vie reilu 6 minuuttia.
+Kun kyseessä on on liki 3 megatavun tiedosto, molemmat algoritmit pakkaavat tiedoston yhtä pieniksi. Kompressoidun tiedoston koko on n. 54% alkuperäisen tiedoston koosta. Huffmanin algoritmi on kuitenkin ylivoimaisesti nopeampi. Siinä menee aikaa n. 5 sekuntia, kun taas LZ77-algoritmin kompressointi vie reilu 6 minuuttia.
 
 #### Kuvat suorituskykytestauksesta 497.6 kilotavun tiedosto
 
@@ -126,13 +126,14 @@ LZ77-algoritmiin perustuva ohjelma on hyvin hidas, ja se ei käännä kaikkia ut
 
 Kuten suorituskykytestauksesta huomataan, bittijonoiksi kääntäminen vie suurimman osan ajasta. Tämä on hieman yllättävää, sillä voisi ajatella, että pisimmän saman merkkijonon etsiminen veisi eniten aikaa. 
 
-LZ77-ohjelman pakkaaman tiedoston koko voisi olla pienempi testauksessa mukana olevan n. 500 kilotavun kohdalla.
+LZ77-ohjelman pakkaaman tiedoston koko voisi olla pienempi testauksessa mukana olevan n. 500 kilotavun kohdalla. Eli kaiken kaikkiaan LZ77-ohjelman pakkaustoimintoa pystyisi varmaan vielä optimoimaan.
 
 ### Aikavaativuus
 Huffmanin algoritmin aikavaativuus on O(n log n), kun n on merkkien määrä. Lähde: https://en.wikipedia.org/wiki/Huffman_coding
 LZ77-algoritmin aikavaativuus on O(n), kun n on merkkien määrä. Lähde: https://ieeexplore.ieee.org/document/1096485
 
 ### Kaikki lähteet koottuna:
+https://www.asciitable.com/#google_vignette)
 https://www.programiz.com/dsa/huffman-coding
 https://docs.python.org/3/library/profile.html
 https://en.wikipedia.org/wiki/UTF-8
